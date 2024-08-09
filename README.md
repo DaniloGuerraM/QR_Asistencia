@@ -7,4 +7,4 @@ Es un proyecto académico para tomar asistencia en la escuela escaneando un codi
 # Diagrama de clases
 | nombre | Email |
 |-|-|
-|Danilo|hola mundo|
+|Danilo|nachotom02@gmial.com|
