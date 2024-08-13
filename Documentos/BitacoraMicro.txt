@@ -112,4 +112,8 @@ te aparecia el valor de "num"
 	por ejemplo num = 1; el QR que te mostraba, al escanearlo te iba a aparecer 1; si num le suma uno, quedaria 2 y el QR que leeras 
 te debe mostrar 2, y asi susecibamente.
 tubimos un problema: que el QR de ves en cuando salia fallado, pero era por un signo que no iba.
+
+	Hemos quedado que habra un QR por cada aula, lo que esta codificado para mostrar el QR tendra un codigo de aula
+mas el codigo que se genera de manera random, mas o manenos algo asi "001-434343"; el "001" significara el codigo de aula, el "434343"
+el codigo de verificasion y un "-" que los separe
 ------------------------------------------------------------------------------------------------------------------------------
