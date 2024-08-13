@@ -104,6 +104,7 @@ le configuramo en el programa(programa que escribiendo "123", por ejemplo, te lo
 	Hemos quedado en entender más sobre la libreria "QRcode" que la renombramo para el esp32y la libreria U8G2
 	Link para la QRcode: https://github.com/ricmoo/QRCode 
 	Link para la U8G2: https://github.com/olikraus/u8g2
+La placa que usamos en le arduino es "NodeMCU-32s"
 --------------------------------------------------------------------------------------------------------------------------
 		12/08/2024
 	hemos modificado el programa de qr, antes lo que acia era mostrar un qr que al escanearlo te mostrabar "Hello World",
