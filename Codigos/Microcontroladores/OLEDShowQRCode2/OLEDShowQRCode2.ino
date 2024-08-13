@@ -12,7 +12,7 @@
 #define OLED_RESET -1
 
 long num= 0;
-
+String id_aula = "001";
 const int qrCodeVersion = 3;
 const int pixelSize = 2;
 
@@ -105,7 +105,7 @@ void loop() {
   String qr = "";
 
   num = random(12345, 123456789);
-  qr =  num;
+  qr = id_aula   + "-" + num;
   showQRCode(qr);
   Serial.println("-------------------------");
   Serial.println(num);
