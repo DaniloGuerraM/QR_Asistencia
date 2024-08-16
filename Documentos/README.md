@@ -12,8 +12,8 @@ El ESP32 puede utilizar Wi-Fi y Bluetooth en simultáneo. Puedes conectar a rede
 es necesario para el esp32
 https://dl.espressif.com/dl/package_esp32_index.json
 te ayudara a instalar la libreria esp32 
-*  03/07/2024
-¿que tipos de datos puedo obtener con la placa de bluetooth?
+###  03/07/2024
+*¿que tipos de datos puedo obtener con la placa de bluetooth?
 
 con ESP32 podemos saber si hay dispositivos bluetooth cerca, 
 independientemente si están vinculados o no.
@@ -22,17 +22,8 @@ Esto se hace midiendo la intensidad de la señal (RSSI) y comprobando cual es la
 Aún así y ajustando un poco más el código, 
 podrías incluso identificar el dispositivo mediante la dirección MAC.
 
-¿como puedo mostrar la MAC de los dispositivo que esten cerca?
-* 27/07/2024
-¿que funciones ofrece el ESP32 para enviar y recibir datos?
 
-
-link:
-	https://github.com/espressif/arduino-esp32/tree/master/libraries/WiFi/examples
-	https://github.com/espressif/arduino-esp32/tree/master/libraries/BluetoothSerial/examples
-	https://github.com/espressif/arduino-esp32/tree/master/libraries/WebServer/examples
-
-* 29/07/2024
+### 29/07/2024
 El proyecto se cambio por tomar asistencia con un codigo QR .
 
 Utilizaremos el "Heltec WIFI KIT 32".
@@ -47,10 +38,7 @@ debido que la pantalla que esta soldad a en sos pines 15, 4 y 16.
 
 usando en ejemplo "Graphics Test" con el parame que dijimos que iba a ir por defecto; el ejemplo
 te mostrara todo lo que se puede imprimir en la pantalla.
-
-¿que es un "BPN"?
-¿como hacer para mostrar un BPN en un "Heltec Wifi  Kit 32"?
-* 30/07/2024
+### 30/07/2024
 	En la practica de hoy hemo usado un ejemplo del "heltec wifi kit 32"; el ejemplo "XBM", con el cual
 bamos a poder imprimir un logo en la pantalla del heltec.
 en este ejemplo tendremo 
@@ -68,14 +56,14 @@ y luego en hexadecimal, para coder cambiar el logo del ejemplo por nuestra image
 	El siguiente sitio nos a ayudado con el heltec : "https://robotzero.one/heltec-wifi-kit-32/"
 
 	Hy quedamo en que tendriamos que practiar lo que hemos echo en este dia
-* 05/08/2024 
+### 05/08/2024 
 	El el tutorial del dia 30/07 nos hacer descargar un conversor de imagen y nos explica a como modificarlo para la convercion apropiada
 para nosotro, pero hoy hemos descubierto que cuando mostramos la imagen que convertimos para el Heltec wifi kit 32, la misma estaba 
 ,por asi decirlo, al reves; los que nosotros hicimos fue que el el conversor elegimos una opcion de "invertir" en los ajuste de convercion
 y haci nos dio la image en el sentido que nosotros quisimos.
 	Ahora nos queda acomodar la imagen, porque a la hora de mostrarla por la pantallita tenian una inperfecciones que para 
 el proyecto no es muy bueno.
-* 06/08/2024
+### 06/08/2024
 	el dian de hoy hemo probado una libreria que nos genera un QR, que se llama "QRCode"
 , la complicacion que esmos tenido que que la libleria no es compatible con el esp32, pero la hemos solusionado cambinado 
 el nombre de la libreria de "qrcode" a "qrcoderm" tanto el ".c" como el ".h", y dentro del ".c" en la linea 33 tambien le cambiamos el nombre
@@ -90,9 +78,9 @@ El lugar donde encontraras para poder modificarlo en mi caso es "C:\Users\nacho\
 	Pero igual estubimos intentando comvertir una imagen para que me los muestre en el heltec wifi kit 32.
 	
 	Este link son ayudo con el QRcode: https://www.arduino.cc/reference/en/libraries/qrcode/
-	Este link es con el que descargamos el QRcode: https://github.com/ricmoo/QRCode 
+*	Este link es con el que descargamos el QRcode: https://github.com/ricmoo/QRCode 
 ¿como hago para utilizar la libreria QRcode en un "heltec wifi kit 32"?
-* 07/08/2024
+### 07/08/2024
 	hemos podido mostrar un codigo QR por una pantalla OLED con un "Esp32-nodeMCU" 
 que utiliza comunicasion I2C. El QR que genera nos mostro "Hello World" porque eso es lo que nosotros 
 le configuramo en el programa(programa que escribiendo "123", por ejemplo, te lo comvierte en QR para poder escanear)
@@ -101,7 +89,7 @@ le configuramo en el programa(programa que escribiendo "123", por ejemplo, te lo
 	Link para la QRcode: https://github.com/ricmoo/QRCode 
 	Link para la U8G2: https://github.com/olikraus/u8g2
 La placa que usamos en le arduino es "NodeMCU-32s"
-* 12/08/2024
+### 12/08/2024
 	hemos modificado el programa de qr, antes lo que acia era mostrar un qr que al escanearlo te mostrabar "Hello World",
 pero ahora le hemos puesto un contador, que a una valor "num" le ivamos sumando de a uno y te mostraba un QR, que al escanearlo 
 te aparecia el valor de "num"
