@@ -8,7 +8,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="38m1FVL9lyvDmm-KVc-Y-4" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/App_Service_Mobile_App.svg;" parent="1" vertex="1">
-          <mxGeometry x="130" y="100" width="81.6" height="120" as="geometry" />
+          <mxGeometry x="131.6" y="105" width="81.6" height="120" as="geometry" />
         </mxCell>
         <mxCell id="kxpsFjQa7iEFdLX6P4Tp-9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="kxpsFjQa7iEFdLX6P4Tp-1" target="kxpsFjQa7iEFdLX6P4Tp-2">
           <mxGeometry relative="1" as="geometry" />
