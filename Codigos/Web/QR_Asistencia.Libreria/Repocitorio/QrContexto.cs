@@ -21,6 +21,13 @@ public class QrContexto : DbContext
         optionsBuilder.UseNpgsql(_cadenaConexion);
         base.OnConfiguring(optionsBuilder);
     }
-
+    public static QrContexto Crearinstancia()
+    {
+        if (intanciaContexto == null)
+        {
+            intanciaContexto = new QrContexto("host=localhost; port=5432; Database=QR_Asistencias; user id=postgres; sslmode=prefer;Password=redites");
+        }
+        return intanciaContexto;
+    }
     
 }
