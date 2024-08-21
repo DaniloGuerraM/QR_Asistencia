@@ -8,6 +8,7 @@ public class Registro_Asistencia
     [Key]
     [Column("registro_id")]
     public int Id_Registro {get; set; }
+    
     [ForeignKey("alumno")]
     [Column("dni")]
     public int DNI {get; set; }

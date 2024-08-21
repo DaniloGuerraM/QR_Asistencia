@@ -8,6 +8,11 @@ public class QrRepositorio
     {
         _qrContexto = QrContexto.Crearinstancia();
     }
+
+    public void TomaAsistencia (Registro_Asistencia registro_Asistencia)
+    {
+        TomarAsistencia(registro_Asistencia);
+    }
     internal void TomarAsistencia (Registro_Asistencia registro_Asistencia)
     {
         _qrContexto.registro_Asistencia.Add(registro_Asistencia);

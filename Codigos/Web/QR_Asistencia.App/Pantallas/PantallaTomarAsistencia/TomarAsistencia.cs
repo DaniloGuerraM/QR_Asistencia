@@ -5,6 +5,7 @@ namespace QR_Asistencia.App.Pantallas.PantallaTomarAsistencia;
 
 public class TomarAsistencia
 {
+    int esta;
     private QrRepositorio _qrRepositorio;
     public TomarAsistencia()
     {
@@ -20,11 +21,21 @@ public class TomarAsistencia
             QrRepositorio buscarDNI = new QrRepositorio();
             List<Alumno> estaDNI = buscarDNI.ListaDeAlumnoPorDNI(dni);
 
-            int esta;
+            
             foreach (Alumno alumno in estaDNI)
             {
                 esta = alumno.DNI;
                 Console.WriteLine(esta);
+            }
+            if (esta == dni)
+            {
+                _qrRepositorio.TomaAsistencia();
+                Console.WriteLine("no esta el dni");
+            }
+            else
+            {
+
+                Console.WriteLine("esta el dni");
             }
         }
         catch (System.Exception ex)
