@@ -8,17 +8,17 @@ public class QrRepositorio
     {
         _qrContexto = QrContexto.Crearinstancia();
     }
-
-    public void TomaAsistencia (Registro_Asistencia registro_Asistencia)
+//////////////////////////////// toma de sistencia ////////////////////////////////
+    public void TomaAsistencia (Registro_Asistencia registro)
     {
-        TomarAsistencia(registro_Asistencia);
+        TomarAsistencia(registro);
     }
-    internal void TomarAsistencia (Registro_Asistencia registro_Asistencia)
+    internal void TomarAsistencia (Registro_Asistencia registro)
     {
-        _qrContexto.registro_Asistencia.Add(registro_Asistencia);
+        _qrContexto.registro_Asistencia.Add(registro);
         _qrContexto.SaveChanges();
     }
-
+//////////////////////////////// para listar los alumnos que estan ////////////////////////////////
     public List<Alumno> ListaDeAlumnoPorDNI (int dni)
     {
         return ListaDeAlumnoDNI(dni);

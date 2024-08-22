@@ -8,11 +8,15 @@ public class Registro_Asistencia
     [Key]
     [Column("registro_id")]
     public int Id_Registro {get; set; }
-    
-    [ForeignKey("alumno")]
+
+    [Column("fecha")]
+    public DateTime Fecha {get; set;}    
+
+    [ForeignKey("AlumnoRegistro_Asistencia")]
     [Column("dni")]
     public int DNI {get; set; }
+
     public Alumno AlumnoRegistro_Asistencia {get; set;}
-    [Column("fecha")]
-    public DateTime Fecha {get; set;}
+
+
 }
