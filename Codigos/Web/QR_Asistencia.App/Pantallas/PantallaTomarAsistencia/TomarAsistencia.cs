@@ -26,6 +26,7 @@ public class TomarAsistencia
             foreach (Alumno alumno in estaDNI)
             {
                 esta = alumno.DNI;
+                Console.Write("el DNI :");
                 Console.WriteLine(esta);
             }
 
@@ -44,7 +45,7 @@ public class TomarAsistencia
                 Registro_Asistencia registro = new Registro_Asistencia();
                 registro.Id_Registro = 455;
                 registro.DNI = dni;
-                registro.Fecha = DateTime.Now;
+                registro.Fecha =  new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds(); //DateTime.Now.Timestamp;
                 _qrRepositorio.TomaAsistencia(registro);
                 Console.WriteLine("esta el dni");
             }

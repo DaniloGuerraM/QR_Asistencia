@@ -10,7 +10,7 @@ public class Registro_Asistencia
     public int Id_Registro {get; set; }
 
     [Column("fecha")]
-    public DateTime Fecha {get; set;}    
+    public long Fecha {get; set;}
 
     [ForeignKey("AlumnoRegistro_Asistencia")]
     [Column("dni")]

@@ -30,7 +30,9 @@ public class QrContexto : DbContext
     {
         if (intanciaContexto == null)
         {
-            intanciaContexto = new QrContexto("host=localhost; port=5432; Database=QR_Asistencias; user id=postgres; sslmode=prefer;Password=redites");
+            // la contraseña regites es para la maquina de escritorio del instituto
+            // la contraseña Nachoytom es para mi maquina
+            intanciaContexto = new QrContexto("host=localhost; port=5432; Database=QR_Asistencias; user id=postgres; sslmode=prefer;Password=Nachoytom"); 
         }
         return intanciaContexto;
     }
