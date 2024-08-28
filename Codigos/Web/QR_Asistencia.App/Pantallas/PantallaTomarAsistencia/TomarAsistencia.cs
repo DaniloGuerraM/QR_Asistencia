@@ -5,7 +5,6 @@ namespace QR_Asistencia.App.Pantallas.PantallaTomarAsistencia;
 
 public class TomarAsistencia
 {
-    DateTime fecha_p;
     int esta;
     private QrRepositorio _qrRepositorio;
     public TomarAsistencia()
@@ -43,11 +42,24 @@ public class TomarAsistencia
             if (esta == dni)
             {
                 Registro_Asistencia registro = new Registro_Asistencia();
-                registro.Id_Registro = 455;
+                //registro.Id_Registro = 455;
                 registro.DNI = dni;
                 registro.Fecha =  new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds(); //DateTime.Now.Timestamp;
                 _qrRepositorio.TomaAsistencia(registro);
                 Console.WriteLine("esta el dni");
+                //////////////////////////// controlando la hora ////////////////////////////
+                long unix2 = 1724802345;
+                long unix = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+
+                DateTime date = DateTimeOffset.FromUnixTimeSeconds(unix).DateTime;
+                DateTime date2 = DateTimeOffset.FromUnixTimeSeconds(unix2).DateTime;
+
+                TimeSpan hora = date.TimeOfDay;
+                TimeSpan hora2 = date2.TimeOfDay;
+
+                Console.WriteLine("hora " + hora.ToString());
+                Console.WriteLine("hora2 " + hora2.ToString());
+                
             }
             else
             {

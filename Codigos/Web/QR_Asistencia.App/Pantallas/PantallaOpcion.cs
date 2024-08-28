@@ -5,17 +5,10 @@ public class PantallaOpcion
 {
     public void Menu()
     {
-        Console.WriteLine("¿Desea Tomar Asistencia? s/n");
-        string q = Console.ReadLine();
-        if (q == "s")
-        {
-            TomarAsistencia t = new TomarAsistencia();
-            t.Asistencia();
-        }
-        else
-        {
-            Console.WriteLine("no");
-        }
+        Console.WriteLine("AAAArrancamos");
+        TomarAsistencia t = new TomarAsistencia();
+        t.Asistencia();
+  
 
     }
 
