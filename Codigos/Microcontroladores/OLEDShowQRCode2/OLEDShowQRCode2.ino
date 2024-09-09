@@ -104,7 +104,7 @@ void setup() {
 void loop() {
   String qr = "";
 
-  num = random(12345, 123456789);
+  num = random(000000, 999999);
   qr = id_aula   + "-" + num;
   showQRCode(qr);
   Serial.println("-------------------------");
