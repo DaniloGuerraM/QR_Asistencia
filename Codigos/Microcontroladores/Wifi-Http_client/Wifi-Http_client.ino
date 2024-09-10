@@ -4,8 +4,16 @@
 // Replace with your WiFi data
 const char* ssid = "laboratorio";
 const char* password = "laboratorio";
-//String url = "http://www.google.com";
-String url = "http://172.23.5.222:3001/esp32";
+
+const char* serverName = "http://172.23.5.208:3001/esp32";
+//String url = "http://www.google.com";//172.23.5.222
+//String url = "http://192.168.56.1:3001/esp32";192.168.56.1
+
+unsigned long lastTime = 0;
+
+unsigned long timerTime = 5000;
+
+
 
 void setup()
 {
@@ -14,8 +22,16 @@ void setup()
 
   // Connect to WiFi
   WiFi.begin(ssid, password);
+  Serial.print("conectando");
   while (WiFi.status() != WL_CONNECTED) 
+  {
+    Serial.print(".");
     delay(500);
+  }
+
+  Serial.println("");
+  Serial.println("conectando a red WIFI con direccion IP");
+  Serial.println(WiFi.localIP());
 
 //WiFi.printDiag((Print) &Serial);
 
@@ -24,7 +40,30 @@ void setup()
 
 void loop()
 {
-  HTTPClient http;
+  if ((millis() - lastTime) > timerTime)
+  {
+    if (WiFi.status() == WL_CONNECTED)
+    {
+      HTTPClient http;
+      WiFiClient client;
+      http.begin(client, serverName);
+
+      http.addHeader("Content-Type", "text/plain");
+      int httpResponseCode = http.POST("Hello. World");
+
+      Serial.print("HTTP Response code: ");
+      Serial.println(httpResponseCode);
+      http.end();
+    }else {
+      Serial.println("WiFi desconectada");
+    }
+    lastTime = millis();
+  }
+}
+
+
+/*
+ *  HTTPClient http;
   WiFiClient client;
 
 //bool begin(NetworkClient &client, String host, uint16_t port, String uri = "/", bool https = false);
@@ -55,9 +94,8 @@ void loop()
 
   delay(30000);
 }
-
-
-/*
+ * 
+ * 
  * #include <WiFi.h>
 #include <HTTPClient.h>
 
