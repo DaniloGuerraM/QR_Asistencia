@@ -4,6 +4,6 @@ namespace Asistencia.Application.Interfaces;
 
 public interface IRegistroAsistenciaRepository
 {
-    //IEnumerable<RegistroAsistencia> GetRegistroAsistencias();
-
+    RegistroAsistencia RequestAssistancebyID(int dni);
+    bool takeAttendanceByID(int dni);
 }

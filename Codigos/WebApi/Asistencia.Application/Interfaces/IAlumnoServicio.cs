@@ -5,8 +5,8 @@ namespace Asistencia.Application.Interfaces;
 public interface IAlumnoServicio
 {
     IEnumerable<Alumno> ObtenerAlumnos();
-    Alumno ObtenerAlumnoPorId(int id);
-    void AgregarAlumno(Alumno alumno);
-    void ActualizarAlumno(Alumno alumno);
-    void EliminarAlumno(int id);
+    Alumno ObtenerAlumnoPorDNI(int dni);
+    bool AgregarAlumno(Alumno alumno);
+    bool ActualizarAlumno(Alumno alumno);
+    bool EliminarAlumno(int id);
 }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Asistencia.Domain.Entities;
 
+[Table("registro_asistencia")]
 public class RegistroAsistencia
 {
     [Key]

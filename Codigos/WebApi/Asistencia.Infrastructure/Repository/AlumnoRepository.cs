@@ -1,31 +1,31 @@
 using Asistencia.Application.Interfaces;
 using Asistencia.Domain.Entities;
 
-namespace Asistencia.Application;
+namespace Asistencia.Infrastructure.Repository;
 
-public class AlumnoServicio : IAlumnoServicio
+public class AlumnoRepository : IAlumnoRepository
 {
-    public bool ActualizarAlumno(Alumno alumno)
+    public void AddAlumno(Alumno alumno)
     {
         throw new NotImplementedException();
     }
 
-    public bool AgregarAlumno(Alumno alumno)
+    public void DeleteAlumno(int id)
     {
         throw new NotImplementedException();
     }
 
-    public bool EliminarAlumno(int id)
+    public Alumno GetAlumnoById(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Alumno ObtenerAlumnoPorDNI(int id)
+    public IEnumerable<Alumno> GetAlumnos()
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Alumno> ObtenerAlumnos()
+    public void UpdateAlumno(Alumno alumno)
     {
         throw new NotImplementedException();
     }
