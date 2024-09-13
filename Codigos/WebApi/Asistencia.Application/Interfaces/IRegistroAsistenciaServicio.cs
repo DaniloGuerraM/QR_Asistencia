@@ -6,4 +6,5 @@ public interface IRegistroAsistenciaServicio
 {
     RegistroAsistencia PedirAsistenciaPorDNI(int ind);
     bool TomarAsistenciaPorDNI(int dni);
+    
 }

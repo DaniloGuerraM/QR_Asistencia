@@ -1,23 +1,38 @@
 using Asistencia.Application.Interfaces;
 using Asistencia.Domain.Entities;
+using Asistencia.Infrastructure.Data;
 
 namespace Asistencia.Infrastructure.Repository;
 
 public class AlumnoRepository : IAlumnoRepository
 {
+    private readonly ApplicationDbContext _applicationDbContext;
+    public AlumnoRepository(ApplicationDbContext applicationDbContext)
+    {
+        _applicationDbContext = applicationDbContext;
+    }
     public void AddAlumno(Alumno alumno)
     {
-        throw new NotImplementedException();
+        _applicationDbContext.Alumnos.Add(alumno);
+        _applicationDbContext.SaveChanges();
+        //throw new NotImplementedException();
     }
 
     public void DeleteAlumno(int id)
     {
-        throw new NotImplementedException();
+        var alumno = _applicationDbContext.Alumnos.Find(id);
+        if (alumno != null)
+        {
+            _applicationDbContext.Alumnos.Remove(alumno);
+            _applicationDbContext.SaveChanges();
+        }
+        //throw new NotImplementedException();
     }
 
     public Alumno GetAlumnoById(int id)
     {
-        throw new NotImplementedException();
+        return _applicationDbContext.Alumnos.Find(id);
+        //throw new NotImplementedException();
     }
 
     public IEnumerable<Alumno> GetAlumnos()
