@@ -4,7 +4,8 @@ namespace Asistencia.Application.Interfaces;
 
 public interface IRegistroAsistenciaServicio
 {
-    RegistroAsistencia PedirAsistenciaPorDNI(int ind);
+    RegistroAsistencia PedirAsistenciaPorDNI(int dni);
+    bool ActualizarAlumno(Alumno alumno);
     bool TomarAsistenciaPorDNI(int dni);
     
 }

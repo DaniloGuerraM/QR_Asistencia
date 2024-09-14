@@ -11,13 +11,14 @@ public class AlumnoRepository : IAlumnoRepository
     {
         _applicationDbContext = applicationDbContext;
     }
+/////////////////////////////////////////////////////
     public void AddAlumno(Alumno alumno)
     {
         _applicationDbContext.Alumnos.Add(alumno);
         _applicationDbContext.SaveChanges();
         //throw new NotImplementedException();
     }
-
+/////////////////////////////////////////////////////
     public void DeleteAlumno(int id)
     {
         var alumno = _applicationDbContext.Alumnos.Find(id);
@@ -28,20 +29,23 @@ public class AlumnoRepository : IAlumnoRepository
         }
         //throw new NotImplementedException();
     }
-
+/////////////////////////////////////////////////////
     public Alumno GetAlumnoById(int id)
     {
         return _applicationDbContext.Alumnos.Find(id);
         //throw new NotImplementedException();
     }
-
+/////////////////////////////////////////////////////
     public IEnumerable<Alumno> GetAlumnos()
     {
-        throw new NotImplementedException();
+        return _applicationDbContext.Alumnos.ToList();
+        //throw new NotImplementedException();
     }
-
+/////////////////////////////////////////////////////
     public void UpdateAlumno(Alumno alumno)
     {
-        throw new NotImplementedException();
+        _applicationDbContext.Alumnos.Update(alumno);
+        _applicationDbContext.SaveChanges();
+        //throw new NotImplementedException();
     }
 }

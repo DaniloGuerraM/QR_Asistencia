@@ -14,4 +14,9 @@ public class RegistroAsistenciaRepository : IRegistroAsistenciaRepository
     {
         throw new NotImplementedException();
     }
+
+    public bool UpdateAlumno(Alumno alumno)
+    {
+        throw new NotImplementedException();
+    }
 }

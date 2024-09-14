@@ -5,6 +5,11 @@ namespace Asistencia.Application;
 
 public class RegistroAsistenciaServicio : IRegistroAsistenciaServicio
 {
+    public bool ActualizarAlumno(Alumno alumno)
+    {
+        throw new NotImplementedException();
+    }
+
     public RegistroAsistencia PedirAsistenciaPorDNI(int ind)
     {
         throw new NotImplementedException();

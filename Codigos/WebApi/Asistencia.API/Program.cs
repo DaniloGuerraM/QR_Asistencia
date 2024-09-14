@@ -1,7 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var connectioString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+b
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
