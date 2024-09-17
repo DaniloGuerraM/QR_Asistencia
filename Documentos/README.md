@@ -100,3 +100,12 @@ tubimos un problema: que el QR de ves en cuando salia fallado, pero era por un s
 	Hemos quedado que habra un QR por cada aula, lo que esta codificado para mostrar el QR tendra un codigo de aula
 mas el codigo que se genera de manera random, mas o manenos algo asi "001-434343"; el "001" significara el codigo de aula, el "434343"
 el codigo de verificasion y un "-" que los separe
+
+### 09/09/2024
+
+	Con este link tendremos informacion sobre los pines del esp32 node32s (https://www.instructables.com/ESP32-Internal-Details-and-Pinout/)
+	
+	Usamos el dato que nos da un ping analogico del esp32, para la semilla de un numera random, asi nos aseguramos que le numero que se muestra 
+	en el QR sea lo mas random posible
+	
+	link para aser get y post (https://randomnerdtutorials.com/esp32-http-get-post-arduino/#http-post)

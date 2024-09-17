@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Asistencia.API.Controllers;
 
 [ApiController]
-[Route("api/alumno/[controller]")]
+[Route("api/[controller]")]
 public class AlumnoControlle : ControllerBase
 {
     private readonly IAlumnoServicio _alumnoServicio;
