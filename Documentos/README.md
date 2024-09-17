@@ -109,3 +109,17 @@ el codigo de verificasion y un "-" que los separe
 	en el QR sea lo mas random posible
 	
 	link para aser get y post (https://randomnerdtutorials.com/esp32-http-get-post-arduino/#http-post)
+	
+### 16/09/2024
+	
+	luego de poder hacer un POST desde el ESP32 hacia mockoon, e prosegido con la implemantacion de hacer un codigo
+	que genere un numero random, luego ese numero lo muestre en formato QR y por ultimo hacer un POST de ese numero 
+	hacia mockoon.
+	el numero random esta entre los parametros 000000 y 999999.
+	la manera del que los envia es de formato json, de la sigiente manera:
+
+	{
+		"nombre": "ESP32", 
+		"valor": "numero"
+	}
+	todo este proceso se hara cada 4 segundo (el tiempo sera modificado de acuerdo a cada uno)
