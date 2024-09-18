@@ -1,8 +1,23 @@
+using Asistencia.Application;
+using Asistencia.Application.Interfaces;
+using Asistencia.Infrastructure.Data;
+using Asistencia.Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var connectioString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-b
+builder.Services.AddScoped<IAlumnoServicio, AlumnoServicio>();
+builder.Services.AddScoped<IAlumnoRepository, AlumnoRepository>();
+
+builder.Services.AddScoped<IAsistenciaServicio, AsistenciaServicio>();
+builder.Services.AddScoped<IAsistenciaRepository, RegistroAsistenciaRepository>();
+
+builder.Services.AddScoped<IControlQRServicio, ControlQRServicio>();
+builder.Services.AddScoped<IControlQRRepository, ControlQRRepository>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectioString));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

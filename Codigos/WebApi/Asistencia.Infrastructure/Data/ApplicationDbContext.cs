@@ -9,7 +9,7 @@ public class ApplicationDbContext : DbContext
     {}
 
     public DbSet<Alumno> Alumnos{get; set;}
-    public DbSet<RegistroAsistencia> RegistroAsistencias{get; set;}
+    public DbSet<AsistenciaR> AsistenciasR{get; set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -6,7 +6,9 @@ public interface IAlumnoServicio
 {
     IEnumerable<Alumno> ObtenerAlumnos();
     Alumno ObtenerAlumnoPorDNI(int dni);
-    bool AgregarAlumno(Alumno alumno);
+    Alumno ObtenerPorMac(string mac);
+    int AgregarAlumno(Alumno alumno);
     bool ActualizarAlumno(Alumno alumno);
+    bool ActualizarAlumnoMac(AlumnoDTO alumnoDTO);
     bool EliminarAlumno(int id);
 }

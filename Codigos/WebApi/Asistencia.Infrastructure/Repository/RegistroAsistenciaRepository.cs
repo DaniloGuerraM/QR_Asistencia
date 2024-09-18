@@ -1,21 +1,23 @@
 using Asistencia.Application.Interfaces;
 using Asistencia.Domain.Entities;
+using Asistencia.Infrastructure.Data;
 
 namespace Asistencia.Infrastructure.Repository;
 
-public class RegistroAsistenciaRepository : IRegistroAsistenciaRepository
+public class RegistroAsistenciaRepository : IAsistenciaRepository
 {
-    public RegistroAsistencia RequestAssistancebyID(int dni)
+    private readonly ApplicationDbContext _applicationDbContext;
+    public RegistroAsistenciaRepository(ApplicationDbContext applicationDbContext)
     {
-        throw new NotImplementedException();
+        _applicationDbContext = applicationDbContext;
     }
 
-    public bool takeAttendanceByID(int dni)
+    public AsistenciaR RequestAssistancebyID(int dni)
     {
-        throw new NotImplementedException();
+        return _applicationDbContext.AsistenciasR.Find(dni);
     }
 
-    public bool UpdateAlumno(Alumno alumno)
+    public bool takeAttendanceByID(AsistenciaR asistenciaR)
     {
         throw new NotImplementedException();
     }

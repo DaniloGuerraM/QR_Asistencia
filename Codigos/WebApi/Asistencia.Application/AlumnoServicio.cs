@@ -17,10 +17,25 @@ public class AlumnoServicio : IAlumnoServicio
         return true;
     }
 /////////////////////////////////////////////////////
-    public bool AgregarAlumno(Alumno alumno)
+
+    public bool ActualizarAlumnoMac(AlumnoDTO alumnoDTO)
+    {
+        var alumno = _alumnoRepository.GetAlumnoById(alumnoDTO.DNI);
+        if (alumno != null)
+        {
+            alumno.MAC = alumnoDTO.MAC;
+            _alumnoRepository.UpdateAlumno(alumno);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /////////////////////////////////////////////////////
+    public int AgregarAlumno(Alumno alumno)
     {
         _alumnoRepository.AddAlumno(alumno);
-        return true;
+        return 1;
     }
 /////////////////////////////////////////////////////
     public bool EliminarAlumno(int id)
@@ -29,13 +44,18 @@ public class AlumnoServicio : IAlumnoServicio
         return true;
     }
 /////////////////////////////////////////////////////
-    public Alumno ObtenerAlumnoPorDNI(int id)
+    public Alumno ObtenerAlumnoPorDNI(int dni)
     {
-        return _alumnoRepository.GetAlumnoById(id);
+        return _alumnoRepository.GetAlumnoById(dni);
     }
 /////////////////////////////////////////////////////
     public IEnumerable<Alumno> ObtenerAlumnos()
     {
         return _alumnoRepository.GetAlumnos();
+    }
+/////////////////////////////////////////////////////
+    public Alumno ObtenerPorMac(string mac)
+    {
+        return _alumnoRepository.GetByMac(mac);
     }
 }

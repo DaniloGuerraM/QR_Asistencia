@@ -21,13 +21,13 @@ public class AlumnoControlle : ControllerBase
         return Ok(alumno);
     }
 ////////////////////////////////////////////////////////////
-    [HttpGet("{DNI}")]
+    [HttpGet("Dni")]
     public ActionResult<Alumno> GetAlumno(int dni)
     {
         var alumno = _alumnoServicio.ObtenerAlumnoPorDNI(dni);
         if (alumno == null)
         {
-            return NotFound();
+            return Ok("No encontrado");//NotFound();
         }
         return Ok(alumno);
     }
@@ -35,10 +35,11 @@ public class AlumnoControlle : ControllerBase
     [HttpPost]
     public IActionResult AddAlumno([FromBody] Alumno alumno)
     {
+        _alumnoServicio.AgregarAlumno(alumno);
         return CreatedAtAction(nameof(GetAlumno),new {id = alumno.DNI}, alumno);
     }
 ////////////////////////////////////////////////////////////
-    [HttpPut("{DNI}")]
+    [HttpPut("dni")]
     public IActionResult UpdateAlumno(int dni, [FromBody] Alumno alumno)
     {
         if (dni != alumno.DNI)
@@ -48,6 +49,18 @@ public class AlumnoControlle : ControllerBase
         _alumnoServicio.ActualizarAlumno(alumno);
         return NoContent();
     }
+////////////////////////////////////////////////////////////
+    [HttpPut("por mac")]
+    public IActionResult UpdateAlumnoMAC([FromBody] AlumnoDTO alumnoDTO)
+    {
+        if (_alumnoServicio.ActualizarAlumnoMac(alumnoDTO))
+        {
+            return Ok();
+        }else{
+            return BadRequest();
+        }
+    }
+
 ////////////////////////////////////////////////////////////
     [HttpDelete("{DNI}")]
     public IActionResult DeleteAlumno(int dni)

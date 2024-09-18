@@ -30,9 +30,9 @@ public class AlumnoRepository : IAlumnoRepository
         //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////
-    public Alumno GetAlumnoById(int id)
+    public Alumno GetAlumnoById(int dni)
     {
-        return _applicationDbContext.Alumnos.Find(id);
+            return _applicationDbContext.Alumnos.Find(dni);
         //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////
@@ -42,6 +42,14 @@ public class AlumnoRepository : IAlumnoRepository
         //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////
+    public Alumno GetByMac(string mac)
+    {
+        return _applicationDbContext.Alumnos
+        .Where(d => d.MAC.ToLower().Contains(mac.ToLower()))
+        .FirstOrDefault();
+    }
+
+    /////////////////////////////////////////////////////
     public void UpdateAlumno(Alumno alumno)
     {
         _applicationDbContext.Alumnos.Update(alumno);
