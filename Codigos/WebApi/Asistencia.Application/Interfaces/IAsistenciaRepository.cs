@@ -4,6 +4,6 @@ namespace Asistencia.Application.Interfaces;
 
 public interface IAsistenciaRepository
 {
-    AsistenciaR RequestAssistancebyID(int dni);
+    IEnumerable<AsistenciaR> RequestAssistancebyID(int dni);
     bool takeAttendanceByID(AsistenciaR asistenciaR);
 }

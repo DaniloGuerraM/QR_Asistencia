@@ -32,7 +32,8 @@ public class AlumnoRepository : IAlumnoRepository
 /////////////////////////////////////////////////////
     public Alumno GetAlumnoById(int dni)
     {
-            return _applicationDbContext.Alumnos.Find(dni);
+        return _applicationDbContext.Alumnos.Find(dni);
+        //return _applicationDbContext.Alumnos.Find(dni);
         //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////

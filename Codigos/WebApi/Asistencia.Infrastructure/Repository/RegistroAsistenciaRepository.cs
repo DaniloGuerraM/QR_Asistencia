@@ -1,6 +1,7 @@
 using Asistencia.Application.Interfaces;
 using Asistencia.Domain.Entities;
 using Asistencia.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asistencia.Infrastructure.Repository;
 
@@ -12,13 +13,24 @@ public class RegistroAsistenciaRepository : IAsistenciaRepository
         _applicationDbContext = applicationDbContext;
     }
 
-    public AsistenciaR RequestAssistancebyID(int dni)
+    public IEnumerable<AsistenciaR> RequestAssistancebyID(int dni)
     {
-        return _applicationDbContext.AsistenciasR.Find(dni);
+        return _applicationDbContext.AsistenciasR.ToList();
     }
 
     public bool takeAttendanceByID(AsistenciaR asistenciaR)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _applicationDbContext.AsistenciasR.Add(asistenciaR);
+            _applicationDbContext.SaveChanges();
+            return true;
+        }
+        catch (System.Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false;
+        }
+        
     }
 }

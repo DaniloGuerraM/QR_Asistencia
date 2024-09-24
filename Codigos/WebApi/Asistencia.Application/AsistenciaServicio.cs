@@ -15,7 +15,7 @@ public class AsistenciaServicio : IAsistenciaServicio
         _controlQRServicio = controlQRServicio;
     }
 
-    public AsistenciaR PedirAsistenciaPorDNI(int dni)
+    public IEnumerable<AsistenciaR> PedirAsistenciaPorDNI(int dni)
     {
         return _registroAsistenciaRepository.RequestAssistancebyID(dni);
     }
@@ -32,7 +32,8 @@ public class AsistenciaServicio : IAsistenciaServicio
                 if (microDTO.Valor == parte[1])
                 {
                     AsistenciaR s = new AsistenciaR();
-                    s.DNI = alumno.DNI;
+                    //s.IdRegistro = 1;
+                    s.AlumnoDNI = alumno.DNI;
                     s.Fecha = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
                     _registroAsistenciaRepository.takeAttendanceByID(s);
                     return true;

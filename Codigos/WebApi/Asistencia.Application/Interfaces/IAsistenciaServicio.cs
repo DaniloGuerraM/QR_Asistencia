@@ -4,7 +4,7 @@ namespace Asistencia.Application.Interfaces;
 
 public interface IAsistenciaServicio
 {
-    AsistenciaR PedirAsistenciaPorDNI(int dni);
+    IEnumerable<AsistenciaR> PedirAsistenciaPorDNI(int dni);
 
 
     bool TomarAsistenciaPorDNI(AsistenciaDTO asistenciaDTO);
