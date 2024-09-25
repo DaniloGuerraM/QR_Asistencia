@@ -18,7 +18,7 @@ namespace Asistencia.API.Controllers
             _registroAsistenciaServicio = registroAsistenciaServicio;
         }
         [HttpGet("{dni}")]
-        public ActionResult<IEnumerable<AsistenciaR>> GetRegistro(int dni)
+        public ActionResult<IEnumerable<AsistenciaAlumno>> GetRegistro(int dni)
         {
             var asistenciat = _registroAsistenciaServicio.PedirAsistenciaPorDNI(dni);
             return Ok(asistenciat);

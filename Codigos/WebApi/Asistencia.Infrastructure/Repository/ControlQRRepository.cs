@@ -16,7 +16,7 @@ namespace Asistencia.Infrastructure.Repository
         }
 
 
-        public void SaveQR(MicroDTO microDTO)
+        public void GuardaQR(MicroDTO microDTO)
         {
             if (!code.ContainsKey(microDTO.Key))
             {
@@ -26,7 +26,7 @@ namespace Asistencia.Infrastructure.Repository
             }
         }
 
-        MicroDTO IControlQRRepository.GetQR()
+        MicroDTO IControlQRRepository.pedirQR()
         {
             MicroDTO microDTO = new MicroDTO();
 

@@ -8,7 +8,7 @@ namespace Asistencia.Application.Interfaces
 {
     public interface IControlQRRepository
     {
-        public void SaveQR(MicroDTO microDTO);
-        public MicroDTO GetQR();
+        public void GuardaQR(MicroDTO microDTO);
+        public MicroDTO pedirQR();
     }
 }

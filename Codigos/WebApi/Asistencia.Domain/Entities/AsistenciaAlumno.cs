@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Asistencia.Domain.Entities;
 
 [Table("registro_asistencia")]
-public class AsistenciaR
+public class AsistenciaAlumno
 {
     [Key]
     [Column("registro_id")]

@@ -6,10 +6,10 @@ namespace Asistencia.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AlumnoControlle : ControllerBase
+public class AlumnoController : ControllerBase
 {
     private readonly IAlumnoServicio _alumnoServicio;
-    public AlumnoControlle(IAlumnoServicio alumnoServicio)
+    public AlumnoController(IAlumnoServicio alumnoServicio)
     {
         _alumnoServicio = alumnoServicio;
     }
@@ -50,7 +50,7 @@ public class AlumnoControlle : ControllerBase
         return NoContent();
     }
 ////////////////////////////////////////////////////////////
-    [HttpPut("por mac")]
+    [HttpPut("mac")]
     public IActionResult UpdateAlumnoMAC([FromBody] AlumnoDTO alumnoDTO)
     {
         if (_alumnoServicio.ActualizarAlumnoMac(alumnoDTO))

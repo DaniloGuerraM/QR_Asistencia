@@ -13,6 +13,11 @@ public class AlumnoServicio : IAlumnoServicio
 /////////////////////////////////////////////////////
     public bool ActualizarAlumno(Alumno alumno)
     {
+        var alumnoIS = ObtenerAlumnoPorDNI(alumno.DNI);
+        if (alumnoIS == null)
+        {
+            throw new InvalidDataException("El alumno no existe");
+        }
         _alumnoRepository.UpdateAlumno(alumno);
         return true;
     }
@@ -20,11 +25,11 @@ public class AlumnoServicio : IAlumnoServicio
 
     public bool ActualizarAlumnoMac(AlumnoDTO alumnoDTO)
     {
-        var alumno = _alumnoRepository.GetAlumnoById(alumnoDTO.DNI);
+        var alumno =  ObtenerAlumnoPorDNI(alumnoDTO.DNI);
         if (alumno != null)
         {
             alumno.MAC = alumnoDTO.MAC;
-            _alumnoRepository.UpdateAlumno(alumno);
+            ActualizarAlumno(alumno);
             return true;
         }else{
             return false;
@@ -34,12 +39,23 @@ public class AlumnoServicio : IAlumnoServicio
     /////////////////////////////////////////////////////
     public int AgregarAlumno(Alumno alumno)
     {
+        var alumnoExiste = ObtenerAlumnoPorDNI(alumno.DNI);
+        if (alumnoExiste != null)
+        {
+            throw new InvalidDataException("El alumno ya existe");
+        }else if (String.IsNullOrEmpty(alumno.Nombre) && String.IsNullOrEmpty(alumno.Apellido)){
+            throw new InvalidDataException("Datos vacios");
+        }
         _alumnoRepository.AddAlumno(alumno);
         return 1;
     }
 /////////////////////////////////////////////////////
     public bool EliminarAlumno(int id)
     {
+        var alumno = ObtenerAlumnoPorDNI(id);
+        if (alumno == null){
+            throw new InvalidDataException("El alumno no existe");
+        }
         _alumnoRepository.DeleteAlumno(id);
         return true;
     }

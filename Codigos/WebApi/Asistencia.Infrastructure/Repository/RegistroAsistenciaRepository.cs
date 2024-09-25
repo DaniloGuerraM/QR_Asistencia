@@ -13,12 +13,20 @@ public class RegistroAsistenciaRepository : IAsistenciaRepository
         _applicationDbContext = applicationDbContext;
     }
 
-    public IEnumerable<AsistenciaR> RequestAssistancebyID(int dni)
+    public IEnumerable<AsistenciaAlumno> ObtenerAsistenciaPorId(int dni)
     {
-        return _applicationDbContext.AsistenciasR.ToList();
+        //var asistenciaRa =
+        //return _applicationDbContext.AsistenciasR.ToList();
+        return _applicationDbContext.AsistenciasR.Where(d => d.AlumnoDNI == dni).ToList();
+        /*
+        return _applicationDbContext.Alumnos
+        .Where(d => d.MAC.ToLower().Contains(mac.ToLower()))
+        .FirstOrDefault();
+        */
     }
 
-    public bool takeAttendanceByID(AsistenciaR asistenciaR)
+
+    public bool RegistrarAsistencia(AsistenciaAlumno asistenciaR)
     {
         try
         {

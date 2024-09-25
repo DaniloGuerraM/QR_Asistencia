@@ -15,9 +15,9 @@ public class AsistenciaServicio : IAsistenciaServicio
         _controlQRServicio = controlQRServicio;
     }
 
-    public IEnumerable<AsistenciaR> PedirAsistenciaPorDNI(int dni)
+    public IEnumerable<AsistenciaAlumno> PedirAsistenciaPorDNI(int dni)
     {
-        return _registroAsistenciaRepository.RequestAssistancebyID(dni);
+        return _registroAsistenciaRepository.ObtenerAsistenciaPorId(dni);
     }
 
     public bool TomarAsistenciaPorDNI(AsistenciaDTO asistenciaDTO)
@@ -27,19 +27,14 @@ public class AsistenciaServicio : IAsistenciaServicio
         if (alumno != null)
         {
             var microDTO  = _controlQRServicio.ObtenerQR();
-            if(microDTO.Key == parte[0])
+            if(microDTO.Key == parte[0] && microDTO.Valor == parte[1])
             {
-                if (microDTO.Valor == parte[1])
-                {
-                    AsistenciaR s = new AsistenciaR();
+                    AsistenciaAlumno s = new AsistenciaAlumno();
                     //s.IdRegistro = 1;
                     s.AlumnoDNI = alumno.DNI;
                     s.Fecha = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-                    _registroAsistenciaRepository.takeAttendanceByID(s);
+                    _registroAsistenciaRepository.RegistrarAsistencia(s);
                     return true;
-                }else{
-                    return false;
-                }
             }else{
                 return false;
             }
