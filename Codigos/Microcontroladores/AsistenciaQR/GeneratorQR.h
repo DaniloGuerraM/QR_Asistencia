@@ -1,25 +1,7 @@
-
-
-#include <Wire.h>
-//#include <Adafruit_GFX.h>
-//#include <Adafruit_SSD1306.h>
-#include <qrcoderm.h>
-#include <Arduino.h>
-#include <U8g2lib.h>
-
-#define SCREEN_WIDTH 128  
-#define SCREEN_HEIGHT 64
-#define OLED_RESET -1
-
-long num= 0;
-String id_aula = "001";
 const int qrCodeVersion = 3;
 const int pixelSize = 2;
 
-//Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
-
-U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
-
+void showQRCode(String qrCodeString);
 void showQRCode(String qrCodeString) {
 
   QRCode qrcode;
@@ -87,30 +69,4 @@ Serial.println(qrCodeSize);
   
   //display.display();
     
-}
-
-void setup() {
-  
-
-  Serial.begin(9600);
-  u8g2.begin();
- //display.begin(SSD1306_EXTERNALVCC, 0x3c);
-
-  //showQRCode("https://cyberello.com");
-  
-
-}
-
-void loop() {
-  String qr = "";
-
-  num = random(12345, 123456789);
-  qr = id_aula   + "-" + num;
-  showQRCode(qr);
-  Serial.println("-------------------------");
-  Serial.println(num);
-  Serial.println("-------------------------");
-
-  delay(4000);
-  //Serial.println("hola Mundo!!");
 }
