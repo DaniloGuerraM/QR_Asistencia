@@ -11,31 +11,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-// ESTO esta clonado..
-public class MainActivity extends AppCompatActivity {
 
-    public Button button;
+public class EleccionActivity extends AppCompatActivity {
+
+    public Button botonTomar;
+    public Button botonPedir;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_eleccion);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        button = findViewById(R.id.logueo);
-        button.setOnClickListener(new View.OnClickListener() {
+        botonPedir = findViewById(R.id.pedirAsistencia);
+        botonTomar = findViewById(R.id.tomarAsistencia);
+        botonPedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SegundaPantalla();
+                PedirAsistencia();
+            }
+        });
+        botonTomar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TomarAsistencia();
             }
         });
     }
-    public void SegundaPantalla(){
-        Intent intent = new Intent(MainActivity.this, EleccionActivity.class);
+    public void TomarAsistencia(){
+        Intent intent = new Intent(EleccionActivity.this, TomarAsistenciaActivity.class);
+        startActivity(intent);
+    }
+    public void PedirAsistencia(){
+        Intent intent = new Intent(EleccionActivity.this, PedirAsistenciaActivity.class);
         startActivity(intent);
     }
 }

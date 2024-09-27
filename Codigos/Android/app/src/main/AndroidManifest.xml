@@ -13,6 +13,21 @@
         android:theme="@style/Theme.AsistenciaITES"
         tools:targetApi="31">
         <activity
+            android:name=".EleccionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TomarAsistenciaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PedirAsistenciaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TerceraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".segundaActivity2"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

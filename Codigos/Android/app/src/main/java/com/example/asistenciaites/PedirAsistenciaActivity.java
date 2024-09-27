@@ -11,31 +11,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-// ESTO esta clonado..
-public class MainActivity extends AppCompatActivity {
 
-    public Button button;
+public class PedirAsistenciaActivity extends AppCompatActivity {
+
+    public Button botonVolver;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pedir_asistencia);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        button = findViewById(R.id.logueo);
-        button.setOnClickListener(new View.OnClickListener() {
+        botonVolver = findViewById(R.id.volver2);
+        botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SegundaPantalla();
+                ParaAtras();
             }
         });
     }
-    public void SegundaPantalla(){
-        Intent intent = new Intent(MainActivity.this, EleccionActivity.class);
+    public void ParaAtras(){
+        Intent intent = new Intent(PedirAsistenciaActivity.this, EleccionActivity.class);
         startActivity(intent);
     }
 }
