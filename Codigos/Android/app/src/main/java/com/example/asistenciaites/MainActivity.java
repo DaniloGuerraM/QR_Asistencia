@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Put(int dni, String idAndroid){
-        String url = "http://172.23.0.45:3001/Asis/Actualizar";
-        String jsonString ="{\"DNI\" : "+ dni+ ", \"Idandroid\" : "+idAndroid+ " }";
+        String url = "http://192.168.0.105:3001/Asitencia/Actualizar";
+        String jsonString ="{\"DNI\" : "+ dni+ ", \"Idandroid\" : \""+idAndroid+ "\" }";
         new PutAPI().execute(url, jsonString);
     }
 
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if (result == null) {
+            if (result != null) {
                 SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("DNI", numerDNI);
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 SegundaPantalla();
             } else {
                 Toast.makeText(MainActivity.this, "Intentalo de nuevo", Toast.LENGTH_SHORT).show();
-                SegundaPantalla();
+                //SegundaPantalla();
             }
         }
     }

@@ -83,16 +83,16 @@ public class EleccionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 PedirAsistencia();
 
-                /* SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
-                int dniGuardado = sharedPreferences.getInt("DNI", -1); // -1 es el valor predeterminado si no se encuentra la clave
+                /*SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+                String macGuardado = sharedPreferences.getString("IdAndroid", ""); // -1 es el valor predeterminado si no se encuentra la clave
 
-                if (dniGuardado != -1) {
+                if (!macGuardado.isEmpty()) {
                     // DNI fue encontrado
-                    textRespuest.setText( "El DNI guardado es: " + dniGuardado);
+                    textRespuest.setText( "El idandroi guardado es: " + macGuardado);
 
                 } else {
                     // No se encontró la clave "DNI"
-                    textRespuest.setText("DNINo se ha encontrado un valor guardado para DNI.");
+                    textRespuest.setText("No se ha encontrado un valor guardado para idAndroi.");
                 }*/
 
             }
@@ -170,10 +170,14 @@ public class EleccionActivity extends AppCompatActivity {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void post(String grLeido) {
+    public void post(String qrLeido) {
 
-        String url = "http://172.23.0.45:3001/Asis/Agregar";
-        String jsonString = "{\"name\":\"carlos\"}";
+        String url = "http://192.168.0.105:3001/Asitencia/Insertar";
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+        String idAndroidGuardado = sharedPreferences.getString("IdAndroid", ""); // -1 es el valor predeterminado si no se encuentra la clave
+
+        String jsonString = "{\"IdAndroi\":\"" + idAndroidGuardado+"\",\"CodigoQR\":\""+qrLeido+"\"}";
         new PostAPI().execute(url, jsonString);
     }
 
