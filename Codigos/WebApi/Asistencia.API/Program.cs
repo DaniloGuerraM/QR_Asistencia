@@ -18,9 +18,17 @@ builder.Services.AddScoped<IControlQRServicio, ControlQRServicio>();
 builder.Services.AddScoped<IControlQRRepository, ControlQRRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectioString));
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddCors(p => p.AddPolicy("corsapp",builder => {
+    builder.WithOrigins("*")
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+}));
+
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -32,10 +40,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("corsapp");
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
+
