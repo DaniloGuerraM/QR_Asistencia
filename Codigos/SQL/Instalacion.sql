@@ -18,9 +18,8 @@ create table public.alumno(
 	dni integer primary key,
 	nombre varchar (30) not null,
 	apellido varchar (30) not null,
-	mac varchar (20) null
+	mac varchar (20) UNIQUE null
 );
-
 -- Crea table de Registro
 create table public.registro_asistencia(
 	registro_id integer primary key,
@@ -28,4 +27,11 @@ create table public.registro_asistencia(
 	fecha bigint
 );
 
-// la fecha  esta en bigint y no en timestamp, porque desde el web server le pasamos un long, que el timestamp no acepta
+-- la fecha  esta en bigint y no en timestamp, porque desde el web server le pasamos un long, que el timestamp no acepta
+
+
+--la siginte linea es para que la mac de cada alumno sea unico y que quede de esta manera
+--	mac varchar (20) UNIQUE null
+--yo lo tenia haci
+--	mac varchar (20) null
+ALTER TABLE public.alumno ADD CONSTRAINT unique_mac UNIQUE (mac);

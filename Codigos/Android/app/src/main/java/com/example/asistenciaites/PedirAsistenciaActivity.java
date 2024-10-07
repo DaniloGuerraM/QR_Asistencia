@@ -78,7 +78,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
 
     public void get() {
         textMostrar.setText("Haciendo un GET");
-        String url = "http://172.23.0.45:3001/api/Alumno";
+        String url = "http://172.23.5.191:3002/api/Alumno";
         new GetAPI().execute(url);
     }
 
@@ -155,5 +155,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
     public void ParaAtras(){
         Intent intent = new Intent(PedirAsistenciaActivity.this, EleccionActivity.class);
         startActivity(intent);
+        finish();
+
     }
 }

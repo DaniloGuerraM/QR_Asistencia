@@ -55,7 +55,7 @@ public class AlumnoController : ControllerBase
     {
         if (_alumnoServicio.ActualizarAlumnoMac(alumnoDTO))
         {
-            return Ok();
+            return Ok("Asistencia tomada");
         }else{
             return BadRequest();
         }

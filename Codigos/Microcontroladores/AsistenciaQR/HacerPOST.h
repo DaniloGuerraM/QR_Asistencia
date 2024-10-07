@@ -1,13 +1,13 @@
 
 
 void Post(String codigo);
-void Post(String codigo){
+void Post(String codAula, String codNumero){
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
     http.begin(serverUrl);
     http.addHeader("Content-Type", "application/json");
     
-    String postData = "{\"nombre\": \"ESP32\", \"valor\": "+ codigo+"}";
+    String postData = "{\"key\": \""+codAula+"\", \"valor\": \""+codNumero+"\"}";
     
     int httpResponseCode = http.POST(postData);
     

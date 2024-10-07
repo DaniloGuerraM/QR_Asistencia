@@ -246,5 +246,6 @@ public class EleccionActivity extends AppCompatActivity {
     public void PedirAsistencia(){
         Intent intent = new Intent(EleccionActivity.this, PedirAsistenciaActivity.class);
         startActivity(intent);
+        finish();
     }
 }

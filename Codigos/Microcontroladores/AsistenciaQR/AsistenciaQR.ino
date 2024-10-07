@@ -30,7 +30,7 @@ void setup() {
 void loop() {
   mostrar = codificacion();
   showQRCode(mostrar);
-  Post(mostrar);
+  
   Serial.println("-------------------------");
   Serial.println(mostrar);
   Serial.println("-------------------------");

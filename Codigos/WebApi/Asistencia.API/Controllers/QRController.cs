@@ -20,8 +20,13 @@ namespace Asistencia.API.Controllers
         [HttpPost]
         public IActionResult AgregarQR([FromBody] MicroDTO microDTO)
         {
-            _controlQRServicio.GuardarQR(microDTO);
-            return Ok();
+            if (_controlQRServicio.GuardarQR(microDTO)){
+                return Ok("Codigo guardado");
+            }else{
+                return NotFound("Codigo no guardado");
+            }
+            
+            
         }
     }
 }

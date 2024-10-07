@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Put(int dni, String idAndroid){
-        String url = "http://192.168.0.105:3001/Asitencia/Actualizar";
-        String jsonString ="{\"DNI\" : "+ dni+ ", \"Idandroid\" : \""+idAndroid+ "\" }";
+        String url = "http://http://172.23.5.191:3002/api/Alumno/mac";
+        String jsonString ="{\"dni\" : "+ dni+ ", \"mac\" : \""+idAndroid+ "\" }";
         new PutAPI().execute(url, jsonString);
     }
 
@@ -130,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
             URL url = new URL(urlstr);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("PUT");
-            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+            urlConnection.setRequestProperty("Accept", "application/json");
             urlConnection.setDoOutput(true);
 
             try (OutputStream os = urlConnection.getOutputStream()) {
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
     public void SegundaPantalla(){
         Intent intent = new Intent(MainActivity.this, EleccionActivity.class);
         startActivity(intent);
+        finish();
     }
     public String ObtenerIdAndroid(){
         return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
