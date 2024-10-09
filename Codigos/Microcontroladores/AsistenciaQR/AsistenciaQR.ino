@@ -2,21 +2,21 @@
 #include "GeneratorQR.h"
 #include "HacerPOST.h"
 #include "NumeroRandom.h"
+bool siConect();
+void conect();
 
 void setup() {
   
-
+  
   Serial.begin(115200);
-  WiFi.begin(ssid, password);
+  conect();
+  
   u8g2.begin();
-
+    
+ 
   randomSeed(analogRead(pinEsp));
 
-    Serial.print("Conectando a WiFi...");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.print(".");
-  }
+   
 
   Serial.println();
   Serial.println("Conectado a WiFi");
@@ -31,10 +31,39 @@ void loop() {
   mostrar = codificacion();
   showQRCode(mostrar);
   
-  Serial.println("-------------------------");
   Serial.println(mostrar);
   Serial.println("-------------------------");
 
-  delay(4000);
+  for(int i=0;i<10;i++){
+    delay(1000);
+    Serial.print(i);  
+  }
+  
   //Serial.println("hola Mundo!!");
+}
+
+void conect(){
+  WiFi.begin(ssidL, passwordL); 
+  if (siConect()){
+    Serial.print("Se logro conectar a: ");
+    Serial.println(ssidL);
+  }else{
+    WiFi.begin(ssidC, passwordC); 
+    if (siConect()){
+      Serial.print("Se logro conectar a:");
+      Serial.println(ssidC);
+    }else{
+      Serial.println("no se puedo conectar a niguna red");
+    }
+  }
+}
+
+bool siConect(){
+  int intentos=0;
+  while(WiFi.status() != WL_CONNECTED && intentos < 5){
+    delay(1000);  
+    Serial.print(".");
+    intentos++;
+  }
+  return WiFi.status() == WL_CONNECTED;
 }

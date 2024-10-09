@@ -11,14 +11,15 @@
 #define SCREEN_HEIGHT 64
 #define OLED_RESET -1
 
-//const char* ssid = "laboratorio";
-const char* ssid = "Casa Guerra";
 
-//const char* password = "laboratorio";
-const char* password = "Nachoytom";
+const char* ssidL = "laboratorio";
+const char* ssidC = "Casa Guerra";
 
-//const char* serverUrl = "http://172.23.5.195:3001/holamundo/prueba";
-const char* serverUrl = "http://192.168.0.101:3002/api/QR";
+const char* passwordL = "laboratorio";
+const char* passwordC = "Nachoytom";
+
+const char* serverUrl = "http://192.168.0.104:3002/api/QR";
+//const char* serverUrl = "http://192.168.0.101:3002/api/QR";
 
 //Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);

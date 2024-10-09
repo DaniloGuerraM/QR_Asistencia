@@ -62,7 +62,7 @@ public class AlumnoController : ControllerBase
     }
 
 ////////////////////////////////////////////////////////////
-    [HttpDelete("{DNI}")]
+    [HttpDelete()]
     public IActionResult DeleteAlumno(int dni)
     {
         _alumnoServicio.EliminarAlumno(dni);

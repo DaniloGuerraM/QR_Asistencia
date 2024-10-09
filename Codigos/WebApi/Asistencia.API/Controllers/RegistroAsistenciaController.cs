@@ -12,15 +12,18 @@ namespace Asistencia.API.Controllers
     [Route("api/[controller]")]
     public class RegistroAsistenciaController : ControllerBase
     {
+        //private readonly IAsistenciaRepository _asistenciaRepository;
+
         private readonly IAsistenciaServicio _registroAsistenciaServicio;
-        public RegistroAsistenciaController(IAsistenciaServicio registroAsistenciaServicio)
+        public RegistroAsistenciaController(IAsistenciaServicio registroAsistenciaServicio /*IAsistenciaRepository asistenciaRepository*/)
         {
             _registroAsistenciaServicio = registroAsistenciaServicio;
+            //_asistenciaRepository = asistenciaRepository;
         }
         [HttpGet("{dni}")]
         public ActionResult<IEnumerable<AsistenciaAlumno>> GetRegistro(int dni)
         {
-            var asistenciat = _registroAsistenciaServicio.PedirAsistenciaPorDNI(dni);
+            var asistenciat = _registroAsistenciaServicio.PedirAsistenciaPorDNI(dni);///_asistenciaRepository.ObtenerUltimaAsistencia(dni);
             return Ok(asistenciat);
         }
         [HttpPost]
@@ -28,7 +31,7 @@ namespace Asistencia.API.Controllers
         {
             if (_registroAsistenciaServicio.TomarAsistenciaPorDNI(asistenciaDTO))
             {
-                return Ok();
+                return Ok("Asistencia tomada");
             }else{
                 return NotFound();
             }

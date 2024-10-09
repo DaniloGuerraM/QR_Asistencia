@@ -27,6 +27,11 @@ namespace Asistencia.Infrastructure.Repository
                 }else{
                     code[microDTO.Key]=microDTO.Valor;
                 }
+                foreach( KeyValuePair<string, string> kvp in code )
+                {
+                    Console.Write(kvp.Key);
+                    Console.WriteLine(kvp.Value);
+                }
                 return true;
             }
             catch (System.Exception)

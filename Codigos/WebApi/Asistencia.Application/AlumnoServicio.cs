@@ -29,17 +29,22 @@ public class AlumnoServicio : IAlumnoServicio
     public bool ActualizarAlumnoMac(AlumnoDTO alumnoDTO)
     {
         var alumno =  ObtenerAlumnoPorDNI(alumnoDTO.DNI);
+        var alumnaMac = ObtenerPorMac(alumnoDTO.MAC);
+        
         if (alumno != null )//&& alumno.MAC ==null
         {
-            var alumnaMac = ObtenerPorMac(alumnoDTO.MAC);
-            alumno.MAC = alumnoDTO.MAC;
-            if(ActualizarAlumno(alumno))
-            {
+            if (alumnaMac == null){
+                alumno.MAC = alumnoDTO.MAC;
+                if(ActualizarAlumno(alumno))
+                {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else if(alumnaMac.DNI == alumno.DNI){
                 return true;
-            }else{
-                return false;
             }
-            
+            return false;
         }else{
             return false;
         }

@@ -36,6 +36,7 @@ import com.google.mlkit.vision.common.InputImage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -82,19 +83,6 @@ public class EleccionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PedirAsistencia();
-
-                /*SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
-                String macGuardado = sharedPreferences.getString("IdAndroid", ""); // -1 es el valor predeterminado si no se encuentra la clave
-
-                if (!macGuardado.isEmpty()) {
-                    // DNI fue encontrado
-                    textRespuest.setText( "El idandroi guardado es: " + macGuardado);
-
-                } else {
-                    // No se encontró la clave "DNI"
-                    textRespuest.setText("No se ha encontrado un valor guardado para idAndroi.");
-                }*/
-
             }
         });
         botonTomar.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +148,7 @@ public class EleccionActivity extends AppCompatActivity {
             {
                 String qrContext = barcode.getRawValue();
                 //textRespuest.setText(qrContext);
+                //Toast.makeText(this, qrContext, Toast.LENGTH_SHORT).show();
                 post(qrContext);
 
                 //Toast.makeText(this, "Contenido del QR:  " +qrContext, Toast.LENGTH_SHORT).show();
@@ -172,12 +161,13 @@ public class EleccionActivity extends AppCompatActivity {
 
     public void post(String qrLeido) {
 
-        String url = "http://192.168.0.105:3001/Asitencia/Insertar";
+        String url = "http://192.168.0.104:3002/api/RegistroAsistencia";
 
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
         String idAndroidGuardado = sharedPreferences.getString("IdAndroid", ""); // -1 es el valor predeterminado si no se encuentra la clave
 
-        String jsonString = "{\"IdAndroi\":\"" + idAndroidGuardado+"\",\"CodigoQR\":\""+qrLeido+"\"}";
+        //Toast.makeText(this, idAndroidGuardado+" "+qrLeido, Toast.LENGTH_SHORT).show();
+        String jsonString = "{\"mac\": \""+idAndroidGuardado+"\",  \"codigoQR\": \""+qrLeido+"\"}";//"{\"IdAndroi\":\"" + idAndroidGuardado+"\",\"CodigoQR\":\""+qrLeido+"\"}";
         new PostAPI().execute(url, jsonString);
     }
 
@@ -195,9 +185,10 @@ public class EleccionActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
+               textRespuest.setText(result);
                 //textView.setText(result);
             } else {
-                //textView.setText("Error al realizar la solicitud");
+                textRespuest.setText("Error al realizar la solicitud");
             }
         }
     }
@@ -209,7 +200,8 @@ public class EleccionActivity extends AppCompatActivity {
             URL url = new URL(urlstr);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
-            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Content-Type", "application/json; utf-8");
+            urlConnection.setRequestProperty("Accept", "application/json");
             urlConnection.setDoOutput(true);
 
             try (OutputStream os = urlConnection.getOutputStream()) {
@@ -218,6 +210,17 @@ public class EleccionActivity extends AppCompatActivity {
             }
 
             int responseCode = urlConnection.getResponseCode();
+            Log.d("HTTP POST", "Response Code: " + responseCode);
+
+
+            InputStream inputStream;
+            if (responseCode >= 200 && responseCode < 300) {
+                inputStream = urlConnection.getInputStream();
+            } else {
+                inputStream = urlConnection.getErrorStream();  // Leer en caso de error
+            }
+
+            //Toast.makeText(this, "Respuesta"+responseCode, Toast.LENGTH_SHORT).show();
             if (responseCode != HttpURLConnection.HTTP_OK && responseCode != HttpURLConnection.HTTP_CREATED) {
                 throw new IOException("Error de respuesta: " + responseCode);
             }
@@ -229,7 +232,7 @@ public class EleccionActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 result.append(line);
             }
-
+            //Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
             return result.toString();
         } finally {
             if (urlConnection != null) {
@@ -238,8 +241,11 @@ public class EleccionActivity extends AppCompatActivity {
             if (reader != null) {
                 reader.close();
             }
+
         }
+
     }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

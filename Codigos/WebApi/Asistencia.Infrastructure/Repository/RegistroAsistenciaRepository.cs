@@ -25,6 +25,10 @@ public class RegistroAsistenciaRepository : IAsistenciaRepository
         */
     }
 
+    public AsistenciaAlumno ObtenerUltimaAsistencia(int dni)
+    {
+        return _applicationDbContext.AsistenciasR.Where(d => d.AlumnoDNI == dni).OrderByDescending(a => a.Fecha).FirstOrDefault();
+    }
 
     public bool RegistrarAsistencia(AsistenciaAlumno asistenciaR)
     {
