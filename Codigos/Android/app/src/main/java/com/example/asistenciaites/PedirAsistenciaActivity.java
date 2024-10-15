@@ -4,13 +4,16 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+
+import com.google.type.DateTime;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,8 +45,10 @@ import java.net.URL;
 public class PedirAsistenciaActivity extends AppCompatActivity {
 
     public Button botonVolver;
-    public TextView textMostrar;
-    public Button buttonMis;
+    public ListView textMostrar;
+    //public Button buttonMis;
+
+    public ArrayList<String> fechaMostrar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,7 +64,17 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
         textMostrar = findViewById(R.id.MostrarAsistencia);
 
         botonVolver = findViewById(R.id.volver2);
-        buttonMis = findViewById(R.id.misAsistencia);
+        //buttonMis = findViewById(R.id.misAsistencia);
+
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            get();
+        } else {
+            Toast.makeText(PedirAsistenciaActivity.this, "\"No conectado\"", Toast.LENGTH_SHORT).show();
+            //textMostrar.setAdapter();
+        }
+        /*
         buttonMis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,11 +83,12 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
                 if (networkInfo != null && networkInfo.isConnected()) {
                     get();
                 } else {
-                    textMostrar.setText("No conectado");
+                    Toast.makeText(PedirAsistenciaActivity.this, "\"No conectado\"", Toast.LENGTH_SHORT).show();
+                    //textMostrar.setAdapter();
                 }
             }
         });
-
+        */
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,8 +103,12 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
 /////////////////////////////////////////////////////////////////////////////////
 
     public void get() {
-        textMostrar.setText("Haciendo un GET");
-        String url = "http://172.23.5.191:3002/api/Alumno";
+       // textMostrar.setText("Haciendo un GET");
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+        int  dniGuardado = sharedPreferences.getInt("DNI", -1); // -1 es el valor predeterminado si no se encuentra la clave
+
+        String url = "http://172.23.5.184:3002/api/RegistroAsistencia/"+dniGuardado;
         new GetAPI().execute(url);
     }
 
@@ -97,9 +127,38 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                textMostrar.setText(result);
+
+                try {
+                    // Convertir el resultado en un JSONArray
+                    JSONArray jsonArray = new JSONArray(result);
+                    fechaMostrar = new ArrayList<String>();
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        long fechaUnix = jsonObject.getLong("fecha");
+
+                        // Multiplicamos por 1000 para convertir a milisegundos
+                        Date date = new Date(fechaUnix * 1000L);
+
+                        @SuppressLint("SimpleDateFormat")
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String formattedDate = sdf.format(date);
+
+                        fechaMostrar.add(formattedDate);
+
+                    }
+                    ArrayAdapter<String> fechaAdactada = new ArrayAdapter<String>(PedirAsistenciaActivity.this, android.R.layout.simple_list_item_1, fechaMostrar);
+                    textMostrar.setAdapter(fechaAdactada);
+
+                } catch (JSONException e) {
+                    //textMostrar.setText("Error al procesar la respuesta JSON");
+                    throw new RuntimeException(e);
+                }
+
             } else {
-                textMostrar.setText("Error al realizar la solicitud");
+                Toast.makeText(PedirAsistenciaActivity.this, "\"Error al realizar la solicitud\"", Toast.LENGTH_SHORT).show();
+                //textMostrar.setText();
             }
         }
     }
@@ -131,7 +190,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
             }
 
             //Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
-            textMostrar.setText(result.toString());
+            //textMostrar.setText(result.toString());
             return result.toString();
         } catch (IOException e) {
             e.printStackTrace();

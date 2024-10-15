@@ -50,7 +50,7 @@ public class EleccionActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
-    public TextView textRespuest;
+
     public Button botonTomar;
     public Button botonPedir;
 
@@ -75,7 +75,7 @@ public class EleccionActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         }
 
-        textRespuest = findViewById(R.id.textRespuesta);
+
 
         botonPedir = findViewById(R.id.pedirAsistencia);
         botonTomar = findViewById(R.id.tomarAsistencia);
@@ -119,7 +119,8 @@ public class EleccionActivity extends AppCompatActivity {
                         .addOnSuccessListener(this::onSuccess)
                         .addOnFailureListener(e -> {
                             // Muestra un mensaje si hay un error al procesar la imagen
-                            textRespuest.setText("Error al procesar el código QR");
+
+                            Toast.makeText(this, "Error al procesar el código QR", Toast.LENGTH_SHORT).show();
                             //Toast.makeText(EleccionActivity.this, "Error al procesar el código QR", Toast.LENGTH_SHORT).show();
                         });
             }
@@ -140,7 +141,7 @@ public class EleccionActivity extends AppCompatActivity {
     {
         if (barcodes.isEmpty())
         {
-            textRespuest.setText("QR no leido");
+            Toast.makeText(this, "QR no leido", Toast.LENGTH_SHORT).show();
             //Toast.makeText(this, "No se pudo leer el QR", Toast.LENGTH_SHORT).show();
         }else
         {
@@ -185,10 +186,11 @@ public class EleccionActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-               textRespuest.setText(result);
+                Toast.makeText(EleccionActivity.this, result, Toast.LENGTH_SHORT).show();
                 //textView.setText(result);
             } else {
-                textRespuest.setText("Error al realizar la solicitud");
+                Toast.makeText(EleccionActivity.this, "Error al realizar la solicitud", Toast.LENGTH_SHORT).show();
+
             }
         }
     }

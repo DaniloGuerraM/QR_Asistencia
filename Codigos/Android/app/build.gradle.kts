@@ -39,7 +39,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.camera.core)
     implementation(libs.mlkit.barcode.scanning)
-    implementation(libs.vision.common)  // Añadido ML Kit para códigos QR
+    implementation(libs.vision.common)
+    implementation(libs.protolite.well.known.types)  // Añadido ML Kit para códigos QR
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

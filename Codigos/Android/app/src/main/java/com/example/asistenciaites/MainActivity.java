@@ -29,7 +29,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     public EditText editTextNum;
     public Button button;
-    public Button buttonScaner;
+
     public int numerDNI;
     public String idAndroid;
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-        buttonScaner = findViewById(R.id.iraScaner);
+
         button = findViewById(R.id.logueo);
         editTextNum = findViewById(R.id.editTextNumber);
         if (isLoggedIn){
@@ -76,16 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        buttonScaner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isLoggedIn){
-                    SegundaPantalla();
-                }else{
-                    Toast.makeText(MainActivity.this, "No Logueado", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
     }
 
     public void Put(int dni, String idAndroid){
