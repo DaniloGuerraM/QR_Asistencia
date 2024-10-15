@@ -5,8 +5,8 @@ namespace Asistencia.Application;
 
 public class AsistenciaServicio : IAsistenciaServicio
 {
-    public TimeSpan hInicio= new TimeSpan(19, 30,0);
-    public TimeSpan hfin= new TimeSpan(22, 0,0);
+    //public TimeSpan hInicio= new TimeSpan(19, 30,0);
+    //public TimeSpan hfin= new TimeSpan(22, 0,0);
 
     private readonly IAsistenciaRepository _registroAsistenciaRepository;
     private readonly IAlumnoServicio _alumnoServicio;
@@ -52,14 +52,12 @@ public class AsistenciaServicio : IAsistenciaServicio
                 var diaGuardado = dateUltimo.ToString("yyyy-MM-dd");
                 var diaHoy = dateHoy.ToString("yyyy-MM-dd");
 
-                TimeSpan hHoy = dateHoy.TimeOfDay;
+                //TimeSpan hHoy = dateHoy.TimeOfDay;
 
                 if (!diaHoy.Equals(diaGuardado)){
-
-                    if (hHoy >= hInicio && hHoy  <= hfin){
-                        _registroAsistenciaRepository.RegistrarAsistencia(s);
-                        return true;
-                    }
+                    _registroAsistenciaRepository.RegistrarAsistencia(s);
+                    return true;
+                    //if (hHoy >= hInicio && hHoy  <= hfin){}
                 }
 
             }
