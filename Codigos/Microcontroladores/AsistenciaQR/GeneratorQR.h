@@ -20,15 +20,15 @@ void showQRCode(String qrCodeString) {
   // startX=0;
   // startY=0;
 
-
+/*
 Serial.print("X: ");
 Serial.println(startX);
 Serial.print("Y: ");
 Serial.println(startY);
-  
+  */
   int qrCodeSize = qrcode.size;
-Serial.print("qrCodeSize: ");
-Serial.println(qrCodeSize);
+//Serial.print("qrCodeSize: ");
+//Serial.println(qrCodeSize);
 
   u8g2.setDrawColor(1);
   u8g2.clearBuffer();

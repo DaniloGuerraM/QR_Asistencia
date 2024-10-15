@@ -8,6 +8,6 @@ public interface IAlumnoRepository
     Alumno GetAlumnoById(int id);
     Alumno GetByMac(string mac);
     void AddAlumno(Alumno alumno);
-    void UpdateAlumno(Alumno alumno);
+    bool UpdateAlumno(Alumno alumno);
     void DeleteAlumno(int id);
 }

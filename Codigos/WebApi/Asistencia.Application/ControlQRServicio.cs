@@ -15,12 +15,17 @@ namespace Asistencia.Application
             _controlQRRepository = controlQRRepository;
         }
 
-        public void GuardarQR(MicroDTO microDTO)
+        public bool GuardarQR(MicroDTO microDTO)
         {
             if (String.IsNullOrEmpty(microDTO.Key) && String.IsNullOrEmpty(microDTO.Valor)){
                  throw new InvalidDataException();
             }
-            _controlQRRepository.GuardaQR(microDTO);
+            if (_controlQRRepository.GuardaQR(microDTO)){
+                return true;
+            }else{
+                return false;
+            }
+            
         }
 
         MicroDTO IControlQRServicio.ObtenerQR()

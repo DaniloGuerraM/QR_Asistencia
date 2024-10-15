@@ -18,19 +18,33 @@ public class AlumnoServicio : IAlumnoServicio
         {
             throw new InvalidDataException("El alumno no existe");
         }
-        _alumnoRepository.UpdateAlumno(alumno);
-        return true;
+        if (_alumnoRepository.UpdateAlumno(alumno)){
+            return true;
+        }else{
+            return false;
+        }
     }
 /////////////////////////////////////////////////////
 
     public bool ActualizarAlumnoMac(AlumnoDTO alumnoDTO)
     {
         var alumno =  ObtenerAlumnoPorDNI(alumnoDTO.DNI);
-        if (alumno != null)
+        var alumnaMac = ObtenerPorMac(alumnoDTO.MAC);
+        
+        if (alumno != null )//&& alumno.MAC ==null
         {
-            alumno.MAC = alumnoDTO.MAC;
-            ActualizarAlumno(alumno);
-            return true;
+            if (alumnaMac == null){
+                alumno.MAC = alumnoDTO.MAC;
+                if(ActualizarAlumno(alumno))
+                {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else if(alumnaMac.DNI == alumno.DNI){
+                return true;
+            }
+            return false;
         }else{
             return false;
         }

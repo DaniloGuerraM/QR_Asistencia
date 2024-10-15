@@ -55,14 +55,14 @@ public class AlumnoController : ControllerBase
     {
         if (_alumnoServicio.ActualizarAlumnoMac(alumnoDTO))
         {
-            return Ok();
+            return Ok("Asistencia tomada");
         }else{
             return BadRequest();
         }
     }
 
 ////////////////////////////////////////////////////////////
-    [HttpDelete("{DNI}")]
+    [HttpDelete()]
     public IActionResult DeleteAlumno(int dni)
     {
         _alumnoServicio.EliminarAlumno(dni);

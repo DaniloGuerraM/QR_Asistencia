@@ -16,13 +16,28 @@ namespace Asistencia.Infrastructure.Repository
         }
 
 
-        public void GuardaQR(MicroDTO microDTO)
+        public bool GuardaQR(MicroDTO microDTO)
         {
-            if (!code.ContainsKey(microDTO.Key))
+            try
             {
-                code.Add(microDTO.Key, microDTO.Valor);
-            }else{
-                code[microDTO.Key]=microDTO.Valor;
+                
+                if (!code.ContainsKey(microDTO.Key))
+                {
+                    code.Add(microDTO.Key, microDTO.Valor);
+                }else{
+                    code[microDTO.Key]=microDTO.Valor;
+                }
+                foreach( KeyValuePair<string, string> kvp in code )
+                {
+                    Console.Write(kvp.Key);
+                    Console.WriteLine(kvp.Value);
+                }
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return true;
+                throw;
             }
         }
 

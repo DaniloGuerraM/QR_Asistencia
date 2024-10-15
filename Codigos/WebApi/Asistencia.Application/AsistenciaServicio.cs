@@ -5,6 +5,9 @@ namespace Asistencia.Application;
 
 public class AsistenciaServicio : IAsistenciaServicio
 {
+    public TimeSpan hInicio= new TimeSpan(19, 30,0);
+    public TimeSpan hfin= new TimeSpan(22, 0,0);
+
     private readonly IAsistenciaRepository _registroAsistenciaRepository;
     private readonly IAlumnoServicio _alumnoServicio;
     private readonly IControlQRServicio _controlQRServicio;
@@ -24,23 +27,43 @@ public class AsistenciaServicio : IAsistenciaServicio
     {
         var alumno = _alumnoServicio.ObtenerPorMac(asistenciaDTO.MAC);
         string[] parte = asistenciaDTO.CodigoQR.Split('-');
-        if (alumno != null)
-        {
+        if (alumno != null){
             var microDTO  = _controlQRServicio.ObtenerQR();
-            if(microDTO.Key == parte[0] && microDTO.Valor == parte[1])
-            {
-                    AsistenciaAlumno s = new AsistenciaAlumno();
-                    //s.IdRegistro = 1;
-                    s.AlumnoDNI = alumno.DNI;
-                    s.Fecha = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-                    _registroAsistenciaRepository.RegistrarAsistencia(s);
-                    return true;
-            }else{
-                return false;
+            if(microDTO.Key == parte[0] && microDTO.Valor == parte[1]){
+                
+                AsistenciaAlumno s = new AsistenciaAlumno();
+                
+                s.AlumnoDNI = alumno.DNI;
+                s.Fecha = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+                var ultima = _registroAsistenciaRepository.ObtenerUltimaAsistencia(s.AlumnoDNI);
+
+                DateTime dateUltimoUtc = DateTimeOffset.FromUnixTimeSeconds(ultima.Fecha).UtcDateTime;
+                DateTime dateHoyUtc = DateTimeOffset.FromUnixTimeSeconds(s.Fecha).UtcDateTime;
+
+                // Definir la zona horaria de Argentina
+                TimeZoneInfo argentinaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Argentina Standard Time");
+                
+                
+                // Convertir la hora UTC a la hora de Argentina
+                DateTime dateUltimo = TimeZoneInfo.ConvertTimeFromUtc(dateUltimoUtc, argentinaTimeZone);
+                DateTime dateHoy = TimeZoneInfo.ConvertTimeFromUtc(dateHoyUtc, argentinaTimeZone);
+
+
+                var diaGuardado = dateUltimo.ToString("yyyy-MM-dd");
+                var diaHoy = dateHoy.ToString("yyyy-MM-dd");
+
+                TimeSpan hHoy = dateHoy.TimeOfDay;
+
+                if (!diaHoy.Equals(diaGuardado)){
+
+                    if (hHoy >= hInicio && hHoy  <= hfin){
+                        _registroAsistenciaRepository.RegistrarAsistencia(s);
+                        return true;
+                    }
+                }
+
             }
-        }else{
-            return false;
         }
-       
+        return false;
     }
 }

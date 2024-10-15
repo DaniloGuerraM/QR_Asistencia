@@ -51,10 +51,20 @@ public class AlumnoRepository : IAlumnoRepository
     }
 
     /////////////////////////////////////////////////////
-    public void UpdateAlumno(Alumno alumno)
+    public bool UpdateAlumno(Alumno alumno)
     {
-        _applicationDbContext.Alumnos.Update(alumno);
-        _applicationDbContext.SaveChanges();
+        try
+        {
+            _applicationDbContext.Alumnos.Update(alumno);
+            _applicationDbContext.SaveChanges();
+            return true;
+        }
+        catch (System.Exception)
+        {
+            return false;
+            throw;
+        }
+
         //throw new NotImplementedException();
     }
 }
