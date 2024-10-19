@@ -36,30 +36,36 @@ public class AsistenciaServicio : IAsistenciaServicio
                 s.AlumnoDNI = alumno.DNI;
                 s.Fecha = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
                 var ultima = _registroAsistenciaRepository.ObtenerUltimaAsistencia(s.AlumnoDNI);
-
-                DateTime dateUltimoUtc = DateTimeOffset.FromUnixTimeSeconds(ultima.Fecha).UtcDateTime;
-                DateTime dateHoyUtc = DateTimeOffset.FromUnixTimeSeconds(s.Fecha).UtcDateTime;
-
-                // Definir la zona horaria de Argentina
-                TimeZoneInfo argentinaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Argentina Standard Time");
                 
-                
-                // Convertir la hora UTC a la hora de Argentina
-                DateTime dateUltimo = TimeZoneInfo.ConvertTimeFromUtc(dateUltimoUtc, argentinaTimeZone);
-                DateTime dateHoy = TimeZoneInfo.ConvertTimeFromUtc(dateHoyUtc, argentinaTimeZone);
+                if (ultima != null){
+                    DateTime dateUltimoUtc = DateTimeOffset.FromUnixTimeSeconds(ultima.Fecha).UtcDateTime;
+                    DateTime dateHoyUtc = DateTimeOffset.FromUnixTimeSeconds(s.Fecha).UtcDateTime;
+
+                    // Definir la zona horaria de Argentina
+                    TimeZoneInfo argentinaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Argentina Standard Time");
+                    
+                    
+                    // Convertir la hora UTC a la hora de Argentina
+                    DateTime dateUltimo = TimeZoneInfo.ConvertTimeFromUtc(dateUltimoUtc, argentinaTimeZone);
+                    DateTime dateHoy = TimeZoneInfo.ConvertTimeFromUtc(dateHoyUtc, argentinaTimeZone);
 
 
-                var diaGuardado = dateUltimo.ToString("yyyy-MM-dd");
-                var diaHoy = dateHoy.ToString("yyyy-MM-dd");
+                    var diaGuardado = dateUltimo.ToString("yyyy-MM-dd");
+                    var diaHoy = dateHoy.ToString("yyyy-MM-dd");
 
-                //TimeSpan hHoy = dateHoy.TimeOfDay;
+                    //TimeSpan hHoy = dateHoy.TimeOfDay;
 
-                if (!diaHoy.Equals(diaGuardado)){
+                    if (!diaHoy.Equals(diaGuardado)){
+                        _registroAsistenciaRepository.RegistrarAsistencia(s);
+                        return true;
+                        //if (hHoy >= hInicio && hHoy  <= hfin){}
+                    }
+
+                }else{
                     _registroAsistenciaRepository.RegistrarAsistencia(s);
                     return true;
-                    //if (hHoy >= hInicio && hHoy  <= hfin){}
                 }
-
+                
             }
         }
         return false;

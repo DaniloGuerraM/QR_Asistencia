@@ -57,20 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     String stringDNI = editTextNum.getText().toString();
                     if (!stringDNI.isEmpty()) {
-                        Toast.makeText(MainActivity.this, "Espere", Toast.LENGTH_SHORT).show();
+
                         numerDNI = Integer.parseInt(stringDNI);
                         idAndroid = ObtenerIdAndroid();
                         Put(numerDNI, idAndroid);
-/*SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt("DNI", numerDNI);
-                        editor.putString("IdAndroid", idAndroid);
-                        editor.putBoolean("isLoggedIn", true);
-                        editor.apply();
-
-                        SegundaPantalla();*/
-
-                        //Toast.makeText(MainActivity.this, idAndroid + "  "+numerDNI, Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -80,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Put(int dni, String idAndroid){
-        String url = "http://192.168.0.101:3002/api/Alumno/mac";//http://http://172.23.5.191:3002/api/Alumno/mac
+        String url = "http://77.81.230.76:5095/api/Alumno/mac";//http://http://172.23.5.191:3002/api/Alumno/mac
 
         String jsonString ="{\"dni\" : "+ dni+ ", \"mac\" : \""+idAndroid+ "\" }";
         new PutAPI().execute(url, jsonString);
