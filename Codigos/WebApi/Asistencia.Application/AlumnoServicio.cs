@@ -20,9 +20,9 @@ public class AlumnoServicio : IAlumnoServicio
         }
         if (_alumnoRepository.UpdateAlumno(alumno)){
             return true;
-        }else{
-            return false;
         }
+        return false;
+        
     }
 /////////////////////////////////////////////////////
 
@@ -44,10 +44,9 @@ public class AlumnoServicio : IAlumnoServicio
             }else if(alumnaMac.DNI == alumno.DNI){
                 return true;
             }
-            return false;
-        }else{
-            return false;
         }
+        return false;
+        
     }
 
     /////////////////////////////////////////////////////
