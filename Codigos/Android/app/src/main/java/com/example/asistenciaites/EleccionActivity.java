@@ -70,12 +70,9 @@ public class EleccionActivity extends AppCompatActivity {
 
 
         //Verificar el permiso de la camara
-
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         }
-
-
 
         botonPedir = findViewById(R.id.pedirAsistencia);
         botonTomar = findViewById(R.id.tomarAsistencia);
@@ -118,10 +115,7 @@ public class EleccionActivity extends AppCompatActivity {
                 BarcodeScanning.getClient().process(image)
                         .addOnSuccessListener(this::onSuccess)
                         .addOnFailureListener(e -> {
-                            // Muestra un mensaje si hay un error al procesar la imagen
-
                             Toast.makeText(this, "Error al procesar el código QR", Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(EleccionActivity.this, "Error al procesar el código QR", Toast.LENGTH_SHORT).show();
                         });
             }
         }
@@ -132,7 +126,6 @@ public class EleccionActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResult);
         if (grantResult. length > 0 && grantResult[0] == PackageManager.PERMISSION_GRANTED)
         {
-            //Toast.makeText(this, "Permiso concedido", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "Permiso Denegado", Toast.LENGTH_SHORT).show();
         }
@@ -142,17 +135,12 @@ public class EleccionActivity extends AppCompatActivity {
         if (barcodes.isEmpty())
         {
             Toast.makeText(this, "QR no leido", Toast.LENGTH_SHORT).show();
-            //Toast.makeText(this, "No se pudo leer el QR", Toast.LENGTH_SHORT).show();
         }else
         {
             for (Barcode barcode : barcodes)
             {
                 String qrContext = barcode.getRawValue();
-                //textRespuest.setText(qrContext);
-                //Toast.makeText(this, qrContext, Toast.LENGTH_SHORT).show();
                 post(qrContext);
-
-                //Toast.makeText(this, "Contenido del QR:  " +qrContext, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -162,13 +150,12 @@ public class EleccionActivity extends AppCompatActivity {
 
     public void post(String qrLeido) {
 
-        String url = "http://192.168.0.104:3002/api/RegistroAsistencia";
+        String url = "http://77.81.230.76:5095/api/";
 
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
         String idAndroidGuardado = sharedPreferences.getString("IdAndroid", ""); // -1 es el valor predeterminado si no se encuentra la clave
 
-        //Toast.makeText(this, idAndroidGuardado+" "+qrLeido, Toast.LENGTH_SHORT).show();
-        String jsonString = "{\"mac\": \""+idAndroidGuardado+"\",  \"codigoQR\": \""+qrLeido+"\"}";//"{\"IdAndroi\":\"" + idAndroidGuardado+"\",\"CodigoQR\":\""+qrLeido+"\"}";
+        String jsonString = "{\"mac\": \""+idAndroidGuardado+"\",  \"codigoQR\": \""+qrLeido+"\"}";
         new PostAPI().execute(url, jsonString);
     }
 
@@ -177,7 +164,7 @@ public class EleccionActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 return hacerPost(params[0], params[1]);
-            } catch (Exception e) {
+            } catch (Exception e) {RegistroAsistencia
                 e.printStackTrace();
                 return null;
             }
@@ -219,10 +206,9 @@ public class EleccionActivity extends AppCompatActivity {
             if (responseCode >= 200 && responseCode < 300) {
                 inputStream = urlConnection.getInputStream();
             } else {
-                inputStream = urlConnection.getErrorStream();  // Leer en caso de error
+                inputStream = urlConnection.getErrorStream();
             }
 
-            //Toast.makeText(this, "Respuesta"+responseCode, Toast.LENGTH_SHORT).show();
             if (responseCode != HttpURLConnection.HTTP_OK && responseCode != HttpURLConnection.HTTP_CREATED) {
                 throw new IOException("Error de respuesta: " + responseCode);
             }
@@ -234,7 +220,7 @@ public class EleccionActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 result.append(line);
             }
-            //Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
+
             return result.toString();
         } finally {
             if (urlConnection != null) {

@@ -18,7 +18,7 @@ const char* ssidC = "Casa Guerra";
 const char* passwordL = "laboratorio";
 const char* passwordC = "Nachoytom";
 
-const char* serverUrl = "http://192.168.0.104:3002/api/QR";
+const char* serverUrl = "http://77.81.230.76:5095/api/QR";
 //const char* serverUrl = "http://192.168.0.101:3002/api/QR";
 
 //Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);

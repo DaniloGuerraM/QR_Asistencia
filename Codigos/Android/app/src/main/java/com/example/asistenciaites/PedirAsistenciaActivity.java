@@ -46,7 +46,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
 
     public Button botonVolver;
     public ListView textMostrar;
-    //public Button buttonMis;
+
 
     public ArrayList<String> fechaMostrar;
 
@@ -64,7 +64,6 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
         textMostrar = findViewById(R.id.MostrarAsistencia);
 
         botonVolver = findViewById(R.id.volver2);
-        //buttonMis = findViewById(R.id.misAsistencia);
 
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -72,23 +71,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
             get();
         } else {
             Toast.makeText(PedirAsistenciaActivity.this, "\"No conectado\"", Toast.LENGTH_SHORT).show();
-            //textMostrar.setAdapter();
         }
-        /*
-        buttonMis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
-                    get();
-                } else {
-                    Toast.makeText(PedirAsistenciaActivity.this, "\"No conectado\"", Toast.LENGTH_SHORT).show();
-                    //textMostrar.setAdapter();
-                }
-            }
-        });
-        */
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,18 +80,12 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
         });
     }
 
-    /*
-                }*/
-
 /////////////////////////////////////////////////////////////////////////////////
 
     public void get() {
-       // textMostrar.setText("Haciendo un GET");
-
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
         int  dniGuardado = sharedPreferences.getInt("DNI", -1); // -1 es el valor predeterminado si no se encuentra la clave
-
-        String url = "http://172.23.5.184:3002/api/RegistroAsistencia/"+dniGuardado;
+        String url = "http://77.81.230.76:5095/api/RegistroAsistencia/"+dniGuardado;
         new GetAPI().execute(url);
     }
 
@@ -129,7 +106,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
             if (result != null) {
 
                 try {
-                    // Convertir el resultado en un JSONArray
+
                     JSONArray jsonArray = new JSONArray(result);
                     fechaMostrar = new ArrayList<String>();
 
@@ -152,13 +129,11 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
                     textMostrar.setAdapter(fechaAdactada);
 
                 } catch (JSONException e) {
-                    //textMostrar.setText("Error al procesar la respuesta JSON");
                     throw new RuntimeException(e);
                 }
 
             } else {
                 Toast.makeText(PedirAsistenciaActivity.this, "\"Error al realizar la solicitud\"", Toast.LENGTH_SHORT).show();
-                //textMostrar.setText();
             }
         }
     }
@@ -174,9 +149,6 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
             urlConnection.connect();
 
             int responseCode = urlConnection.getResponseCode();
-            //Toast.makeText(this, "\"HTTP GET\", \"Response Code: \" + responseCode", Toast.LENGTH_SHORT).show();
-            //Log.d("HTTP GET", "Response Code: " + responseCode);
-
             if (responseCode != HttpURLConnection.HTTP_OK) {
                 throw new IOException("Error de respuesta: " + responseCode);
             }
@@ -189,8 +161,6 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
                 result.append(line);
             }
 
-            //Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
-            //textMostrar.setText(result.toString());
             return result.toString();
         } catch (IOException e) {
             e.printStackTrace();

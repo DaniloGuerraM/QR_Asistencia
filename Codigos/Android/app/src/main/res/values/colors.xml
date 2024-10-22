@@ -4,7 +4,8 @@
 
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorRojo">#EB0C0C</color>  <!-- Azul botón -->
-    <color name="colorcele">#138BF4</color>  <!-- Azul oscuro botón -->
-
+    <color name="colorRojo">#EB0C0C</color>
+    <color name="colorcele">#138BF4</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
 </resources>
