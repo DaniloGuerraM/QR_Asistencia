@@ -13,14 +13,14 @@ public class AlumnoController : ControllerBase
     {
         _alumnoServicio = alumnoServicio;
     }
-////////////////////////////////////////////////////////////
+/*---------------------------------------------------------------------------------------------------------------------------*/
     [HttpGet]
     public ActionResult<IEnumerable<Alumno>> GetAlumnos()
     {
         var alumno = _alumnoServicio.ObtenerAlumnos();
         return Ok(alumno);
     }
-////////////////////////////////////////////////////////////
+/*---------------------------------------------------------------------------------------------------------------------------*/
     [HttpGet("Dni")]
     public ActionResult<Alumno> GetAlumno(int dni)
     {
@@ -31,37 +31,41 @@ public class AlumnoController : ControllerBase
         }
         return Ok(alumno);
     }
-////////////////////////////////////////////////////////////
+/*---------------------------------------------------------------------------------------------------------------------------*/
     [HttpPost]
     public IActionResult AddAlumno([FromBody] Alumno alumno)
     {
-        _alumnoServicio.AgregarAlumno(alumno);
-        return CreatedAtAction(nameof(GetAlumno),new {id = alumno.DNI}, alumno);
-    }
-////////////////////////////////////////////////////////////
-    [HttpPut("dni")]
-    public IActionResult UpdateAlumno(int dni, [FromBody] Alumno alumno)
-    {
-        if (dni != alumno.DNI)
-        {
-            return BadRequest();
+        if(_alumnoServicio.AgregarAlumno(alumno)){
+
+            return CreatedAtAction(nameof(GetAlumno),new {id = alumno.DNI}, alumno);
         }
-        _alumnoServicio.ActualizarAlumno(alumno);
-        return NoContent();
+        return BadRequest();
+        
     }
-////////////////////////////////////////////////////////////
+/*---------------------------------------------------------------------------------------------------------------------------*/
+    [HttpPut("dni")]
+    public IActionResult UpdateAlumno( [FromBody] Alumno alumno)
+    {
+        if (_alumnoServicio.ActualizarAlumno(alumno))
+        {
+            return Ok("Alumno actualizado");
+        }
+        return BadRequest();
+        
+    }
+/*---------------------------------------------------------------------------------------------------------------------------*/
     [HttpPut("mac")]
     public IActionResult UpdateAlumnoMAC([FromBody] AlumnoDTO alumnoDTO)
     {
         if (_alumnoServicio.ActualizarAlumnoMac(alumnoDTO))
         {
-            return Ok("Asistencia tomada");
+            return Ok("Mac guardada");
         }else{
             return BadRequest();
         }
     }
 
-////////////////////////////////////////////////////////////
+/*---------------------------------------------------------------------------------------------------------------------------*/
     [HttpDelete()]
     public IActionResult DeleteAlumno(int dni)
     {

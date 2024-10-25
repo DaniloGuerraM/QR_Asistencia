@@ -17,6 +17,7 @@ namespace Asistencia.API.Controllers
         {
             _controlQRServicio = controlQRServicio;
         }
+/*---------------------------------------------------------------------------------------------------------------------------*/        
         [HttpPost]
         public IActionResult AgregarQR([FromBody] MicroDTO microDTO)
         {

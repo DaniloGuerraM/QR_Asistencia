@@ -86,6 +86,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
         int  dniGuardado = sharedPreferences.getInt("DNI", -1); // -1 es el valor predeterminado si no se encuentra la clave
         String url = "http://77.81.230.76:5095/api/RegistroAsistencia/"+dniGuardado;
+        //String url = "http://192.168.0.104:3002/api/RegistroAsistencia/"+dniGuardado;
         new GetAPI().execute(url);
     }
 
@@ -133,7 +134,7 @@ public class PedirAsistenciaActivity extends AppCompatActivity {
                 }
 
             } else {
-                Toast.makeText(PedirAsistenciaActivity.this, "\"Error al realizar la solicitud\"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PedirAsistenciaActivity.this, "error al pedir las asistencia", Toast.LENGTH_SHORT).show();
             }
         }
     }

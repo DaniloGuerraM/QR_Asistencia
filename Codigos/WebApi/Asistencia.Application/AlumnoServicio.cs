@@ -14,34 +14,32 @@ public class AlumnoServicio : IAlumnoServicio
     public bool ActualizarAlumno(Alumno alumno)
     {
         var alumnoIS = ObtenerAlumnoPorDNI(alumno.DNI);
-        if (alumnoIS == null)
+        if (alumnoIS != null)
         {
-            throw new InvalidDataException("El alumno no existe");
-        }
-        if (_alumnoRepository.UpdateAlumno(alumno)){
-            return true;
+            if (_alumnoRepository.UpdateAlumno(alumno)){
+                return true;
+            }
         }
         return false;
         
     }
 /////////////////////////////////////////////////////
+    public bool ActualizarAlumnoMac(AlumnoDTO alumnoDTO){
 
-    public bool ActualizarAlumnoMac(AlumnoDTO alumnoDTO)
-    {
         var alumno =  ObtenerAlumnoPorDNI(alumnoDTO.DNI);
         var alumnaMac = ObtenerPorMac(alumnoDTO.MAC);
         
-        if (alumno != null )//&& alumno.MAC ==null
-        {
+        if (alumno != null ){
+
             if (alumnaMac == null){
+
                 alumno.MAC = alumnoDTO.MAC;
-                if(ActualizarAlumno(alumno))
-                {
+                if(ActualizarAlumno(alumno) ){
+
                     return true;
-                }else{
-                    return false;
                 }
             }else if(alumnaMac.DNI == alumno.DNI){
+
                 return true;
             }
         }
@@ -50,17 +48,20 @@ public class AlumnoServicio : IAlumnoServicio
     }
 
     /////////////////////////////////////////////////////
-    public int AgregarAlumno(Alumno alumno)
+    public bool AgregarAlumno(Alumno alumno)
     {
         var alumnoExiste = ObtenerAlumnoPorDNI(alumno.DNI);
-        if (alumnoExiste != null)
-        {
-            throw new InvalidDataException("El alumno ya existe");
-        }else if (String.IsNullOrEmpty(alumno.Nombre) && String.IsNullOrEmpty(alumno.Apellido)){
-            throw new InvalidDataException("Datos vacios");
+        if (alumnoExiste == null){
+
+            if (!String.IsNullOrEmpty(alumno.Nombre) && !String.IsNullOrEmpty(alumno.Apellido)){
+
+                if (_alumnoRepository.AddAlumno(alumno)){
+
+                    return true;
+                }
+            }
         }
-        _alumnoRepository.AddAlumno(alumno);
-        return 1;
+        return false;
     }
 /////////////////////////////////////////////////////
     public bool EliminarAlumno(int id)

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText editTextNum;
     public Button button;
 
+
     public int numerDNI;
     public String idAndroid;
 
@@ -70,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Put(int dni, String idAndroid){
-        String url = "http://77.81.230.76:5095/api/Alumno/mac";//http://http://172.23.5.191:3002/api/Alumno/mac
-
+        String url = "http://77.81.230.76:5095/api/Alumno/mac";
+        //String url = "http://192.168.0.104:3002/api/Alumno/mac";
         String jsonString ="{\"dni\" : "+ dni+ ", \"mac\" : \""+idAndroid+ "\" }";
         new PutAPI().execute(url, jsonString);
     }
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                Toast.makeText(MainActivity.this, "se esta Logueando", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Listo", Toast.LENGTH_SHORT).show();
                 SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("DNI", numerDNI);

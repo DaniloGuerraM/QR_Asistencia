@@ -20,12 +20,14 @@ namespace Asistencia.API.Controllers
             _registroAsistenciaServicio = registroAsistenciaServicio;
             //_asistenciaRepository = asistenciaRepository;
         }
+/*---------------------------------------------------------------------------------------------------------------------------*/
         [HttpGet("{dni}")]
         public ActionResult<IEnumerable<AsistenciaAlumno>> GetRegistro(int dni)
         {
             var asistenciat = _registroAsistenciaServicio.PedirAsistenciaPorDNI(dni);///_asistenciaRepository.ObtenerUltimaAsistencia(dni);
             return Ok(asistenciat);
         }
+/*---------------------------------------------------------------------------------------------------------------------------*/
         [HttpPost]
         public IActionResult TomarAsistencia([FromBody] AsistenciaDTO asistenciaDTO)
         {

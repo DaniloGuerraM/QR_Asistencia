@@ -149,8 +149,8 @@ public class EleccionActivity extends AppCompatActivity {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void post(String qrLeido) {
-
-        String url = "http://77.81.230.76:5095/api/";
+        String url = "http://77.81.230.76:5095/api/RegistroAsistencia";
+        //String url = "http://192.168.0.104:3002/api/RegistroAsistencia";//
 
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
         String idAndroidGuardado = sharedPreferences.getString("IdAndroid", ""); // -1 es el valor predeterminado si no se encuentra la clave
@@ -164,7 +164,7 @@ public class EleccionActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 return hacerPost(params[0], params[1]);
-            } catch (Exception e) {RegistroAsistencia
+            } catch (Exception e) {//RegistroAsistencia
                 e.printStackTrace();
                 return null;
             }
@@ -176,7 +176,7 @@ public class EleccionActivity extends AppCompatActivity {
                 Toast.makeText(EleccionActivity.this, result, Toast.LENGTH_SHORT).show();
                 //textView.setText(result);
             } else {
-                Toast.makeText(EleccionActivity.this, "Error al realizar la solicitud", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EleccionActivity.this, "error al tomar asistencia", Toast.LENGTH_SHORT).show();
 
             }
         }

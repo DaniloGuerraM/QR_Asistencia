@@ -15,14 +15,7 @@ public class RegistroAsistenciaRepository : IAsistenciaRepository
 
     public IEnumerable<AsistenciaAlumno> ObtenerAsistenciaPorId(int dni)
     {
-        //var asistenciaRa =
-        //return _applicationDbContext.AsistenciasR.ToList();
         return _applicationDbContext.AsistenciasR.Where(d => d.AlumnoDNI == dni).ToList();
-        /*
-        return _applicationDbContext.Alumnos
-        .Where(d => d.MAC.ToLower().Contains(mac.ToLower()))
-        .FirstOrDefault();
-        */
     }
 
     public AsistenciaAlumno ObtenerUltimaAsistencia(int dni)

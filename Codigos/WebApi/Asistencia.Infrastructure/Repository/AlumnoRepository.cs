@@ -12,10 +12,21 @@ public class AlumnoRepository : IAlumnoRepository
         _applicationDbContext = applicationDbContext;
     }
 /////////////////////////////////////////////////////
-    public void AddAlumno(Alumno alumno)
+    public bool AddAlumno(Alumno alumno)
     {
-        _applicationDbContext.Alumnos.Add(alumno);
-        _applicationDbContext.SaveChanges();
+        try
+        {
+            var sinMac = alumno;
+            sinMac.MAC = null;
+            _applicationDbContext.Alumnos.Add(sinMac);
+            _applicationDbContext.SaveChanges();
+            return true;
+        }
+        catch (System.Exception)
+        {
+            return false;
+            throw;
+        }
         //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////
