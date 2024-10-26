@@ -37,7 +37,7 @@ public class AsistenciaServicio : IAsistenciaServicio
                 s.Alumno = alumno;
                 //s.AlumnoDNI = alumno.DNI;
                 s.Fecha = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-                var ultima = _registroAsistenciaRepository.ObtenerUltimaAsistencia(s.AlumnoDNI);
+                var ultima = _registroAsistenciaRepository.ObtenerUltimaAsistencia( alumno.DNI);
                 
                 if (ultima != null){
                     DateTime dateUltimoUtc = DateTimeOffset.FromUnixTimeSeconds(ultima.Fecha).UtcDateTime;

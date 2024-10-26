@@ -1,6 +1,7 @@
 using Asistencia.Application.Interfaces;
 using Asistencia.Domain.Entities;
 using Asistencia.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asistencia.Infrastructure.Repository;
 
@@ -38,20 +39,16 @@ public class AlumnoRepository : IAlumnoRepository
             _applicationDbContext.Alumnos.Remove(alumno);
             _applicationDbContext.SaveChanges();
         }
-        //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////
     public Alumno GetAlumnoById(int dni)
     {
         return _applicationDbContext.Alumnos.Find(dni);
-        //return _applicationDbContext.Alumnos.Find(dni);
-        //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////
     public IEnumerable<Alumno> GetAlumnos()
     {
         return _applicationDbContext.Alumnos.ToList();
-        //throw new NotImplementedException();
     }
 /////////////////////////////////////////////////////
     public Alumno GetByMac(string mac)
@@ -66,16 +63,24 @@ public class AlumnoRepository : IAlumnoRepository
     {
         try
         {
-            _applicationDbContext.Alumnos.Update(alumno);
+            var existingAlumno = _applicationDbContext.Alumnos.Local.FirstOrDefault(a => a.DNI == alumno.DNI);
+
+            if (existingAlumno != null){
+               
+                _applicationDbContext.Entry(existingAlumno).CurrentValues.SetValues(alumno);
+            }
+            else{
+
+                _applicationDbContext.Alumnos.Attach(alumno);
+                _applicationDbContext.Entry(alumno).State = EntityState.Modified;
+            }
             _applicationDbContext.SaveChanges();
             return true;
         }
-        catch (System.Exception)
+        catch (System.Exception ex)
         {
+            Console.WriteLine(ex.Message);
             return false;
-            throw;
         }
-
-        //throw new NotImplementedException();
     }
 }
