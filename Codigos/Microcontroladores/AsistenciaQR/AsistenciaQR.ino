@@ -56,6 +56,8 @@ void conect(){
       Serial.println("no se puedo conectar a niguna red");
     }
   }
+  Serial.println("Esta es la url que se usara");
+  Serial.println(serverUrl);
 }
 
 bool siConect(){

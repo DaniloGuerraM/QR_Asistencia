@@ -17,7 +17,7 @@ const char* ssidC = "Casa Guerra";
 
 const char* passwordL = "laboratorio";
 const char* passwordC = "Nachoytom";
-
+//77.81.230.76:5095
 const char* serverUrl = "http://77.81.230.76:5095/api/QR";
 //const char* serverUrl = "http://192.168.0.104:3002/api/QR";
 
