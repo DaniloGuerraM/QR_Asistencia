@@ -1,9 +1,9 @@
+--para el server del postgres
+--77.81.230.79
+--pasword:postgres2024
 
-postgres2024
 -- Database: QR_Asistencias
-
 -- DROP DATABASE IF EXISTS "QR_Asistencias";
-
 CREATE DATABASE "QR_Asistencias"
     WITH
     OWNER = postgres
@@ -68,3 +68,7 @@ delete from public.registro_asistencia;
 
 --D:\QR_Asistencia\Codigos\WebApi> dotnet publish --output serverapi
 --serverapi es la carpeta que se generara y la cual tendra los archivos
+
+23636838
+Mauricio
+Orellana

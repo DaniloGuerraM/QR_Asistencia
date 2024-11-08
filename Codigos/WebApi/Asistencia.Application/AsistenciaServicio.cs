@@ -56,13 +56,16 @@ public class AsistenciaServicio : IAsistenciaServicio
                     var diaHoy = dateHoy.ToString("yyyy-MM-dd");
 
                     //TimeSpan hHoy = dateHoy.TimeOfDay;
-
+                    /*
                     if (!diaHoy.Equals(diaGuardado)){
                         _registroAsistenciaRepository.RegistrarAsistencia(s);
                         return true;
                         //if (hHoy >= hInicio && hHoy  <= hfin){}
                     }
-
+                    */
+                    _registroAsistenciaRepository.RegistrarAsistencia(s);
+                    return true;
+                    
                 }else{
                     _registroAsistenciaRepository.RegistrarAsistencia(s);
                     return true;
